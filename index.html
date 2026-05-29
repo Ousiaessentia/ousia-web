@@ -1459,14 +1459,9 @@
 </footer>
 
 <script>
-  // ── CONFIGURACIÓN ──────────────────────────────────────────────────────
-  // Cuando tengas una plataforma definida (Calendly, Formspree, EmailJS, etc.)
-  // solo cambia esta función. El resto del formulario no necesita tocar.
-  // ───────────────────────────────────────────────────────────────────────
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzegIP2NaJ9_qAFjV-ELoF78QF7F_f5e07vIBeRulsHG9eD6fTvUe8X-1fZz0q6CNA/exec';
 
-  const EMAIL_DESTINO = 'hola@ousiaessentia.com'; // ← cambia por el email real de la marca
-
-  function enviarFormulario() {
+  async function enviarFormulario() {
     const nombre   = document.getElementById('nombre').value.trim();
     const apellido = document.getElementById('apellido').value.trim();
     const email    = document.getElementById('email').value.trim();
@@ -1474,7 +1469,7 @@
     const momento  = document.getElementById('momento').value;
     const mensaje  = document.getElementById('mensaje').value.trim();
 
-    // Validación mínima
+    // Validación
     if (!nombre || !email || !pais || !momento) {
       resaltarCamposVacios({ nombre, email, pais, momento });
       return;
@@ -1484,22 +1479,29 @@
       return;
     }
 
-    // Guardar en localStorage (disponible hasta que definas un backend)
-    const inscripcion = {
-      id: Date.now(),
-      fecha: new Date().toISOString(),
-      nombre, apellido, email, pais, momento, mensaje
-    };
-    const anteriores = JSON.parse(localStorage.getItem('ousia_inscripciones') || '[]');
-    anteriores.push(inscripcion);
-    localStorage.setItem('ousia_inscripciones', JSON.stringify(anteriores));
+    // Deshabilitar botón mientras envía
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
 
-    // Mostrar estado de éxito
-    document.getElementById('formOusia').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, apellido, email, pais, momento, mensaje })
+      });
 
-    // Scroll suave al inicio del formulario
-    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Mostrar estado de éxito
+      document.getElementById('formOusia').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    } catch (err) {
+      btn.textContent = 'Iniciar mi viaje →';
+      btn.disabled = false;
+      alert('Hubo un problema al enviar. Por favor intenta de nuevo.');
+    }
   }
 
   function emailValido(e) {
@@ -1514,7 +1516,6 @@
     });
   }
 
-  // Limpiar borde rojo al escribir
   document.addEventListener('DOMContentLoaded', () => {
     ['nombre','apellido','email','pais','momento'].forEach(id => {
       const el = document.getElementById(id);
