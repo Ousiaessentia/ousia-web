@@ -1594,7 +1594,6 @@
         <div class="onirya-form" id="oniryaForm">
           <p class="onirya-form-label">✦ Únete a la lista de espera</p>
           <div class="onirya-form-row">
-            <input class="onirya-input" type="text" id="oniryaNombre" placeholder="Tu nombre" autocomplete="given-name" />
             <input class="onirya-input" type="email" id="oniryaEmail" placeholder="tu@correo.com" autocomplete="email" />
             <button class="btn-onirya" onclick="enviarOnirya()">Avisarme →</button>
           </div>
@@ -1868,15 +1867,9 @@
   });
 
   async function enviarOnirya() {
-    const nombre = document.getElementById('oniryaNombre').value.trim();
-    const email  = document.getElementById('oniryaEmail').value.trim();
+    const email = document.getElementById('oniryaEmail').value.trim();
 
-    if (!nombre || !email) {
-      if (!nombre) document.getElementById('oniryaNombre').style.borderColor = 'rgba(220,80,80,0.7)';
-      if (!email)  document.getElementById('oniryaEmail').style.borderColor  = 'rgba(220,80,80,0.7)';
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       document.getElementById('oniryaEmail').style.borderColor = 'rgba(220,80,80,0.7)';
       return;
     }
@@ -1890,7 +1883,7 @@
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tipo: 'onirya', nombre, email })
+        body: JSON.stringify({ tipo: 'onirya', email })
       });
       document.getElementById('oniryaForm').style.display    = 'none';
       document.getElementById('oniryaSuccess').style.display = 'block';
