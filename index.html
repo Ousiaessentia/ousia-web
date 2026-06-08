@@ -1049,6 +1049,209 @@
     to { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
+  /* ─── ONIRYA ─── */
+  .onirya {
+    padding: 7rem 6rem;
+    background: var(--noche);
+    position: relative;
+    overflow: hidden;
+  }
+  .onirya::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 60%, rgba(138,100,200,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 20%, rgba(201,164,76,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .onirya-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .onirya-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+  .onirya-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1rem;
+  }
+  .onirya-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(201,164,76,0.7);
+    border: 1px solid rgba(201,164,76,0.2);
+    padding: 0.45rem 0.9rem;
+    margin-bottom: 1.8rem;
+  }
+  .onirya-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 4vw, 4.6rem);
+    font-weight: 300;
+    line-height: 1.06;
+    color: var(--crema);
+    margin-bottom: 1.5rem;
+  }
+  .onirya-title em { font-style: italic; color: var(--dorado); }
+  .onirya-desc {
+    font-size: 0.9rem;
+    line-height: 2.1;
+    color: var(--texto-suave);
+    margin-bottom: 2.5rem;
+  }
+  .onirya-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+  }
+  .btn-onirya {
+    padding: 1rem 2.4rem;
+    background: transparent;
+    color: var(--dorado);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border: 1px solid rgba(201,164,76,0.5);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.35s;
+    display: inline-block;
+  }
+  .btn-onirya:hover {
+    background: rgba(201,164,76,0.08);
+    border-color: var(--dorado);
+    color: var(--dorado);
+  }
+  .onirya-note {
+    font-size: 0.68rem;
+    color: var(--texto-medio);
+    font-style: italic;
+    letter-spacing: 0.08em;
+  }
+
+  /* Visual lado derecho */
+  .onirya-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+  .onirya-screen {
+    width: 100%;
+    max-width: 320px;
+    background: #0d0d1a;
+    border: 1px solid rgba(201,164,76,0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .onirya-screen::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,164,76,0.07) 0%, transparent 70%);
+  }
+  .onirya-screen-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.4rem;
+  }
+  .onirya-screen-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--crema);
+    letter-spacing: 0.1em;
+  }
+  .onirya-screen-tag {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    border: 1px solid rgba(201,164,76,0.3);
+    padding: 0.25rem 0.55rem;
+  }
+  .onirya-entry {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,164,76,0.1);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+  .onirya-entry-date {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    opacity: 0.7;
+    margin-bottom: 0.4rem;
+  }
+  .onirya-entry-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: rgba(245,240,232,0.65);
+    line-height: 1.6;
+  }
+  .onirya-entry-ai {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid rgba(201,164,76,0.08);
+    font-size: 0.68rem;
+    color: var(--dorado);
+    opacity: 0.8;
+    letter-spacing: 0.05em;
+  }
+
+  /* Features grid Onirya */
+  .onirya-features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(201,164,76,0.08);
+    border: 1px solid rgba(201,164,76,0.08);
+  }
+  .onirya-feature {
+    background: var(--noche);
+    padding: 2.2rem 1.8rem;
+    transition: background 0.3s;
+  }
+  .onirya-feature:hover { background: rgba(201,164,76,0.04); }
+  .onirya-feature-icon {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .onirya-feature-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--crema);
+    margin-bottom: 0.5rem;
+  }
+  .onirya-feature-desc {
+    font-size: 0.75rem;
+    color: var(--texto-medio);
+    line-height: 1.75;
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 960px) {
     nav { padding: 1.2rem 2rem; }
@@ -1069,6 +1272,10 @@
     .footer-cta { padding: 5rem 2rem; }
     footer { padding: 2rem; flex-direction: column; gap: 1.2rem; text-align: center; }
     .mapa-meta { grid-template-columns: 1fr 1fr; }
+    .onirya { padding: 5rem 2rem; }
+    .onirya-header { grid-template-columns: 1fr; gap: 3rem; }
+    .onirya-visual { align-items: center; }
+    .onirya-features { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -1081,6 +1288,7 @@
     <li><a href="#sobre">Sobre mí</a></li>
     <li><a href="#mapa">Mapa del Alma</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#onirya">Onirya</a></li>
     <li><a href="#inscripcion" class="nav-cta">Iniciar mi viaje</a></li>
   </ul>
 </nav>
@@ -1309,6 +1517,79 @@
       <p class="testimonio-author">— Sara L., 31 años</p>
       <p class="testimonio-service">✦ Mapa del Alma</p>
     </div>
+  </div>
+</section>
+
+<div class="divider divider-dark">✦ &nbsp; ◇ &nbsp; ○ &nbsp; ◇ &nbsp; ✦</div>
+
+<!-- ONIRYA -->
+<section class="onirya" id="onirya">
+  <div class="onirya-inner">
+
+    <div class="onirya-header">
+      <!-- Izquierda: texto -->
+      <div class="onirya-left">
+        <p class="onirya-eyebrow">✦ Herramienta digital · por Ousia Essentia</p>
+        <div class="onirya-tag">🌙 &nbsp; Próximamente disponible</div>
+        <h2 class="onirya-title">
+          Tu inconsciente<br>
+          tiene algo que<br>
+          <em>decirte.</em>
+        </h2>
+        <p class="onirya-desc">
+          Onirya es un diario de sueños con inteligencia artificial. Registra cada sueño, reflexiona con preguntas guiadas y descubre los patrones que se repiten en tu mente mientras duermes — una extensión del trabajo interior que hacemos juntas en el Mapa del Alma.
+        </p>
+        <div class="onirya-cta-group">
+          <a href="#" class="btn-onirya">Quiero saber cuándo abre</a>
+          <span class="onirya-note">Lista de espera · Sin compromiso</span>
+        </div>
+      </div>
+
+      <!-- Derecha: preview visual -->
+      <div class="onirya-visual">
+        <div class="onirya-screen">
+          <div class="onirya-screen-top">
+            <span class="onirya-screen-logo">Onirya</span>
+            <span class="onirya-screen-tag">Diario onírico</span>
+          </div>
+          <div class="onirya-entry">
+            <div class="onirya-entry-date">Junio 7 · 2026</div>
+            <p class="onirya-entry-text">"Estaba en una casa que no era la mía, pero la sentía familiar. Había una puerta que no podía abrir..."</p>
+            <div class="onirya-entry-ai">✦ Interpretación IA disponible</div>
+          </div>
+          <div class="onirya-entry">
+            <div class="onirya-entry-date">Junio 5 · 2026</div>
+            <p class="onirya-entry-text">"El agua subía despacio. No sentía miedo — solo quietud..."</p>
+            <div class="onirya-entry-ai">✦ Patrón detectado: agua · 3 veces</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="onirya-features">
+      <div class="onirya-feature">
+        <span class="onirya-feature-icon">🌙</span>
+        <div class="onirya-feature-name">Diario onírico</div>
+        <p class="onirya-feature-desc">Registra cada sueño con fecha, emociones y símbolos. Tu historia del inconsciente, organizada y siempre contigo.</p>
+      </div>
+      <div class="onirya-feature">
+        <span class="onirya-feature-icon">◈</span>
+        <div class="onirya-feature-name">Reflexión guiada</div>
+        <p class="onirya-feature-desc">Preguntas cuidadosamente diseñadas para que explores el sueño desde adentro — antes de que hable la IA.</p>
+      </div>
+      <div class="onirya-feature">
+        <span class="onirya-feature-icon">✦</span>
+        <div class="onirya-feature-name">Interpretación IA</div>
+        <p class="onirya-feature-desc">Análisis profundo basado en tu narrativa personal. No genérico — construido sobre lo que tú viviste.</p>
+      </div>
+      <div class="onirya-feature">
+        <span class="onirya-feature-icon">◉</span>
+        <div class="onirya-feature-name">Mapa de patrones</div>
+        <p class="onirya-feature-desc">Visualiza qué símbolos y emociones se repiten. Tu inconsciente habla en patrones — aquí puedes leerlos.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
