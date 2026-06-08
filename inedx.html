@@ -1137,14 +1137,65 @@
     border-color: var(--dorado);
     color: var(--dorado);
   }
+  .onirya-form {
+    margin-top: 0;
+  }
+  .onirya-form-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 0.9rem;
+    display: block;
+  }
+  .onirya-form-row {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+  }
+  .onirya-input {
+    flex: 1;
+    min-width: 140px;
+    background: rgba(245,240,232,0.05);
+    border: 1px solid rgba(201,164,76,0.25);
+    color: var(--crema);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    padding: 0.8rem 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 0;
+  }
+  .onirya-input::placeholder { color: rgba(245,240,232,0.28); }
+  .onirya-input:focus { border-color: rgba(201,164,76,0.7); }
+  .onirya-form-success {
+    display: none;
+    margin-top: 0.5rem;
+  }
+  .onirya-success-icon {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--dorado);
+    letter-spacing: 0.5em;
+    margin-bottom: 0.7rem;
+  }
+  .onirya-success-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--crema);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .onirya-success-text em { color: var(--dorado); }
+
   .onirya-note {
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     color: var(--texto-medio);
     font-style: italic;
     letter-spacing: 0.08em;
   }
-
-  /* Visual lado derecho */
   .onirya-visual {
     display: flex;
     flex-direction: column;
@@ -1539,9 +1590,19 @@
         <p class="onirya-desc">
           Onirya es un diario de sueños con inteligencia artificial. Registra cada sueño, reflexiona con preguntas guiadas y descubre los patrones que se repiten en tu mente mientras duermes — una extensión del trabajo interior que hacemos juntas en el Mapa del Alma.
         </p>
-        <div class="onirya-cta-group">
-          <a href="#" class="btn-onirya">Quiero saber cuándo abre</a>
-          <span class="onirya-note">Lista de espera · Sin compromiso</span>
+        <!-- Formulario lista de espera -->
+        <div class="onirya-form" id="oniryaForm">
+          <p class="onirya-form-label">✦ Únete a la lista de espera</p>
+          <div class="onirya-form-row">
+            <input class="onirya-input" type="text" id="oniryaNombre" placeholder="Tu nombre" autocomplete="given-name" />
+            <input class="onirya-input" type="email" id="oniryaEmail" placeholder="tu@correo.com" autocomplete="email" />
+            <button class="btn-onirya" onclick="enviarOnirya()">Avisarme →</button>
+          </div>
+          <span class="onirya-note">Sin compromiso · Solo te escribo cuando abra</span>
+        </div>
+        <div class="onirya-form-success" id="oniryaSuccess">
+          <span class="onirya-success-icon">✦ ◇ ○ ◇ ✦</span>
+          <p class="onirya-success-text">Ya estás en la lista. <em>Nos vemos pronto.</em></p>
         </div>
       </div>
 
@@ -1805,6 +1866,40 @@
       });
     });
   });
+
+  async function enviarOnirya() {
+    const nombre = document.getElementById('oniryaNombre').value.trim();
+    const email  = document.getElementById('oniryaEmail').value.trim();
+
+    if (!nombre || !email) {
+      if (!nombre) document.getElementById('oniryaNombre').style.borderColor = 'rgba(220,80,80,0.7)';
+      if (!email)  document.getElementById('oniryaEmail').style.borderColor  = 'rgba(220,80,80,0.7)';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('oniryaEmail').style.borderColor = 'rgba(220,80,80,0.7)';
+      return;
+    }
+
+    const btn = document.querySelector('#oniryaForm .btn-onirya');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tipo: 'onirya', nombre, email })
+      });
+      document.getElementById('oniryaForm').style.display    = 'none';
+      document.getElementById('oniryaSuccess').style.display = 'block';
+    } catch (err) {
+      btn.textContent = 'Avisarme →';
+      btn.disabled = false;
+      alert('Hubo un problema. Por favor intenta de nuevo.');
+    }
+  }
 </script>
 </body>
 </html>
