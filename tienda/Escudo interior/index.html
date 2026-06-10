@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escudo Interior — Ousia Essentia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noche:        #1A1A10;
+    --crema:        #F5F0E8;
+    --dorado:       #C9A44C;
+    --calido:       #E8B857;
+    --niebla:       #E9E5D4;
+    --dorado-borde: rgba(201,164,76,0.25);
+    --dorado-suave: rgba(201,164,76,0.07);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--crema);
+    color: var(--noche);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.4rem 5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(245,240,232,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--dorado-borde);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 300;
+    letter-spacing: 0.35em; color: var(--noche); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--noche);
+    opacity: 0.5; text-decoration: none; transition: opacity 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--dorado); }
+  .nav-back {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--dorado); text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: opacity 0.3s;
+  }
+  .nav-back:hover { opacity: 0.7; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--noche);
+    padding: 9rem 6rem 7rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+    position: relative; overflow: hidden;
+    min-height: 90vh;
+  }
+  .hero::before {
+    content: 'φ';
+    position: absolute; font-family: 'Cormorant Garamond', serif;
+    font-size: 50rem; font-weight: 300; line-height: 1;
+    color: rgba(201,164,76,0.03);
+    top: 50%; right: -8rem;
+    transform: translateY(-50%);
+    pointer-events: none; user-select: none;
+  }
+
+  /* Portada tipográfica */
+  .hero-cover {
+    position: relative; z-index: 2;
+    background: linear-gradient(145deg, #1e1e12 0%, #252515 50%, #1a1a10 100%);
+    border: 1px solid var(--dorado-borde);
+    padding: 4rem 3rem;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; min-height: 520px;
+    overflow: hidden;
+  }
+  .hero-cover::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+  }
+  .hero-cover::after {
+    content: '✦';
+    position: absolute; font-size: 18rem;
+    color: rgba(201,164,76,0.04);
+    bottom: -3rem; right: -3rem;
+    pointer-events: none;
+  }
+  .cover-eyebrow {
+    font-size: 0.6rem; letter-spacing: 0.5em;
+    text-transform: uppercase; color: var(--dorado);
+    margin-bottom: 2.5rem; position: relative; z-index: 2;
+  }
+  .cover-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 9rem; font-weight: 300; line-height: 0.85;
+    color: rgba(201,164,76,0.12);
+    position: relative; z-index: 2;
+  }
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-style: italic; font-weight: 300;
+    color: var(--crema); line-height: 1.15;
+    margin-top: -1rem; margin-bottom: 1.2rem;
+    position: relative; z-index: 2;
+  }
+  .cover-rule {
+    width: 40px; height: 1px; background: var(--dorado);
+    margin: 0 auto 1.2rem;
+  }
+  .cover-subtitle {
+    font-size: 0.75rem; line-height: 1.8;
+    color: rgba(245,240,232,0.4); max-width: 260px;
+    position: relative; z-index: 2;
+  }
+  .cover-badge {
+    margin-top: 2.5rem;
+    font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--noche);
+    background: var(--dorado); padding: 0.4rem 1.2rem;
+    position: relative; z-index: 2;
+  }
+  .cover-footer {
+    position: absolute; bottom: 1.5rem; left: 0; right: 0;
+    text-align: center; z-index: 2;
+    font-size: 0.6rem; letter-spacing: 0.25em;
+    color: rgba(201,164,76,0.35); text-transform: uppercase;
+  }
+
+  /* Lado derecho del hero */
+  .hero-content { position: relative; z-index: 2; }
+  .hero-breadcrumb {
+    font-size: 0.62rem; letter-spacing: 0.25em;
+    color: rgba(245,240,232,0.3); text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-breadcrumb a {
+    color: rgba(245,240,232,0.3); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .hero-breadcrumb a:hover { color: var(--dorado); }
+  .hero-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--dorado);
+    margin-bottom: 1.2rem; display: block;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 4vw, 4.2rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--crema); margin-bottom: 0.8rem;
+  }
+  .hero-title em { font-style: italic; color: var(--dorado); }
+  .hero-tagline {
+    font-size: 0.9rem; line-height: 1.8;
+    color: rgba(245,240,232,0.45); margin-bottom: 2.5rem;
+  }
+  .hero-meta {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .hero-meta-item {
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .meta-label {
+    font-size: 0.58rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: rgba(245,240,232,0.25);
+  }
+  .meta-value {
+    font-size: 0.8rem; color: rgba(245,240,232,0.7);
+  }
+  .hero-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--crema);
+    margin-bottom: 0.4rem; line-height: 1;
+  }
+  .hero-price-note {
+    font-size: 0.65rem; color: rgba(245,240,232,0.3);
+    letter-spacing: 0.15em; margin-bottom: 2rem;
+  }
+  .hero-bonus {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--dorado); border: 1px solid var(--dorado-borde);
+    padding: 0.5rem 1rem; margin-bottom: 2rem;
+    background: rgba(201,164,76,0.06);
+  }
+  .btn-comprar {
+    display: inline-block;
+    background: var(--dorado); color: var(--noche);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    padding: 1.1rem 2.8rem; border: none; cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-comprar:hover { background: var(--calido); transform: translateY(-1px); }
+  .paypal-note {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-top: 1rem; font-size: 0.65rem;
+    color: rgba(245,240,232,0.2); letter-spacing: 0.1em;
+  }
+
+  /* ── SEPARADOR ── */
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem; padding: 3rem 0; color: var(--dorado);
+    font-size: 0.65rem; letter-spacing: 0.4em;
+  }
+  .divider-line { flex: 1; max-width: 120px; height: 1px; background: var(--dorado-borde); }
+
+  /* ── SECCIÓN GENÉRICA ── */
+  .section { padding: 6rem; }
+  .section-niebla { background: var(--niebla); }
+  .section-noche { background: var(--noche); }
+  .section-eyebrow {
+    font-size: 0.62rem; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--dorado);
+    display: block; margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.2;
+    color: var(--noche); margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--dorado); }
+  .section-title-light { color: var(--crema); }
+  .section-sub {
+    font-size: 0.85rem; line-height: 1.9;
+    color: rgba(26,26,16,0.5); max-width: 540px;
+  }
+  .section-sub-light { color: rgba(245,240,232,0.45); }
+
+  /* ── PARA QUIÉN ── */
+  .para-quien-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .pq-card {
+    border: 1px solid rgba(26,26,16,0.1);
+    padding: 2rem; background: var(--crema);
+    transition: border-color 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .pq-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; width: 0; height: 2px;
+    background: var(--dorado); transition: width 0.4s ease;
+  }
+  .pq-card:hover::before { width: 100%; }
+  .pq-card:hover { border-color: var(--dorado-borde); }
+  .pq-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .pq-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-style: italic;
+    color: var(--noche); margin-bottom: 0.6rem;
+  }
+  .pq-text {
+    font-size: 0.78rem; line-height: 1.8;
+    color: rgba(26,26,16,0.55);
+  }
+
+  /* ── CONTENIDO ── */
+  .contenido-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 0; margin-top: 3.5rem;
+    border: 1px solid var(--dorado-borde);
+  }
+  .paso {
+    padding: 2.2rem;
+    border-right: 1px solid var(--dorado-borde);
+    border-bottom: 1px solid var(--dorado-borde);
+    transition: background 0.3s;
+  }
+  .paso:nth-child(2n) { border-right: none; }
+  .paso:nth-last-child(-n+2) { border-bottom: none; }
+  .paso:hover { background: rgba(201,164,76,0.04); }
+  .paso-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300;
+    color: rgba(201,164,76,0.2); line-height: 1; margin-bottom: 0.5rem;
+  }
+  .paso-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-style: italic;
+    color: var(--crema); margin-bottom: 0.5rem;
+  }
+  .paso-text {
+    font-size: 0.75rem; line-height: 1.8;
+    color: rgba(245,240,232,0.45);
+  }
+
+  /* ── FAQ ── */
+  .faq-list { margin-top: 3.5rem; }
+  .faq-item {
+    border-bottom: 1px solid rgba(26,26,16,0.1);
+  }
+  .faq-question {
+    width: 100%; background: none; border: none; cursor: pointer;
+    padding: 1.8rem 0;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 2rem; text-align: left;
+  }
+  .faq-question-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 400;
+    color: var(--noche); line-height: 1.3;
+  }
+  .faq-icon {
+    font-size: 1.2rem; color: var(--dorado);
+    flex-shrink: 0; transition: transform 0.3s;
+    font-family: 'Raleway', sans-serif; font-weight: 300;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-answer {
+    font-size: 0.82rem; line-height: 1.9;
+    color: rgba(26,26,16,0.55);
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 300px; padding-bottom: 1.8rem;
+  }
+
+  /* ── CTA FINAL ── */
+  .cta-final {
+    background: var(--noche);
+    padding: 8rem 6rem;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-final::before {
+    content: '✦'; position: absolute;
+    font-size: 32rem; color: rgba(201,164,76,0.03);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 300; color: var(--crema);
+    line-height: 1.1; margin-bottom: 1.5rem;
+    position: relative; z-index: 2;
+  }
+  .cta-title em { font-style: italic; color: var(--dorado); }
+  .cta-sub {
+    font-size: 0.85rem; line-height: 1.9;
+    color: rgba(245,240,232,0.4);
+    max-width: 480px; margin: 0 auto 3rem;
+    position: relative; z-index: 2;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(26,26,16,0.88); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--noche);
+    border: 1px solid var(--dorado-borde);
+    padding: 3rem; width: 90%; max-width: 480px;
+    position: relative; animation: fadeUp 0.3s ease;
+  }
+  .modal::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+  }
+  .modal-close {
+    position: absolute; top: 1.2rem; right: 1.5rem;
+    background: none; border: none; cursor: pointer;
+    font-size: 1.2rem; color: rgba(245,240,232,0.3);
+    transition: color 0.2s; line-height: 1;
+  }
+  .modal-close:hover { color: var(--crema); }
+  .modal-eyebrow {
+    font-size: 0.6rem; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem;
+  }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-style: italic; font-weight: 300;
+    color: var(--crema); line-height: 1.2; margin-bottom: 0.5rem;
+  }
+  .modal-subtitle {
+    font-size: 0.75rem; line-height: 1.7;
+    color: rgba(245,240,232,0.45); margin-bottom: 0.8rem;
+  }
+  .modal-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: var(--crema); margin-bottom: 0.3rem;
+  }
+  .modal-bonus-note {
+    font-size: 0.7rem; color: var(--dorado); margin-bottom: 2rem; opacity: 0.8;
+  }
+  .modal-divider { height: 1px; background: var(--dorado-borde); margin-bottom: 2rem; }
+  .modal-steps { list-style: none; margin-bottom: 2rem; }
+  .modal-steps li {
+    display: flex; gap: 1rem; align-items: flex-start;
+    font-size: 0.78rem; line-height: 1.7;
+    color: rgba(245,240,232,0.55); margin-bottom: 0.8rem;
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--dorado);
+    flex-shrink: 0; line-height: 1.4;
+  }
+  #paypal-button-container { margin-top: 0.5rem; }
+  .modal-security {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-top: 1.2rem; font-size: 0.62rem;
+    color: rgba(245,240,232,0.2); letter-spacing: 0.1em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--noche);
+    border-top: 1px solid rgba(201,164,76,0.1);
+    padding: 2rem 6rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; letter-spacing: 0.35em; color: var(--crema);
+  }
+  .footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.25); letter-spacing: 0.1em; }
+  .footer-web { font-size: 0.65rem; color: rgba(201,164,76,0.5); letter-spacing: 0.1em; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; gap: 3rem; min-height: auto; }
+    .hero::before { display: none; }
+    .hero-cover { min-height: 380px; padding: 3rem 2rem; }
+    .section { padding: 4rem 1.5rem; }
+    .para-quien-grid { grid-template-columns: 1fr; }
+    .contenido-grid { grid-template-columns: 1fr; }
+    .paso { border-right: none; }
+    .paso:nth-last-child(-n+2) { border-bottom: 1px solid var(--dorado-borde); }
+    .paso:last-child { border-bottom: none; }
+    .cta-final { padding: 5rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+    .modal { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">OUSIA</a>
+  <ul class="nav-links">
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/tienda" style="color:var(--dorado); opacity:1;">Biblioteca</a></li>
+    <li><a href="/#contacto">Reservar</a></li>
+  </ul>
+  <a href="/tienda" class="nav-back">← Biblioteca</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- Portada tipográfica -->
+  <div class="hero-cover">
+    <span class="cover-eyebrow">Ousia Essentia · Ebook 01</span>
+    <div class="cover-num">01</div>
+    <div class="cover-title">Escudo<br>Interior</div>
+    <div class="cover-rule"></div>
+    <p class="cover-subtitle">7 pasos para proteger tu energía y recuperar tu paz</p>
+    <span class="cover-badge">✦ Disponible ahora</span>
+    <div class="cover-footer">Valentina Montoya Londoño · Ousia Essentia</div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="hero-content">
+    <p class="hero-breadcrumb">
+      <a href="/tienda">Biblioteca</a> &nbsp;/&nbsp; Escudo Interior
+    </p>
+    <span class="hero-eyebrow">✦ Guía práctica · PDF</span>
+    <h1 class="hero-title">
+      <em>Escudo Interior</em>
+    </h1>
+    <p class="hero-tagline">
+      7 pasos para proteger tu energía y recuperar tu paz
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="meta-label">Formato</span>
+        <span class="meta-value">PDF descargable</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Extensión</span>
+        <span class="meta-value">36 páginas</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Nivel</span>
+        <span class="meta-value">Toda mujer en camino</span>
+      </div>
+    </div>
+    <div class="hero-bonus">✦ Bonus de lanzamiento incluido esta semana</div>
+    <div class="hero-price">$35.000 COP</div>
+    <p class="hero-price-note">Descarga inmediata · Pago seguro vía PayPal</p>
+    <button class="btn-comprar" onclick="abrirModal()">Quiero este ebook ✦</button>
+    <div class="paypal-note">🔒 Recibes el PDF en tu correo en menos de 5 min</div>
+  </div>
+
+</section>
+
+<!-- PARA QUIÉN -->
+<div class="divider" style="background:var(--crema); padding: 2.5rem 6rem;">
+  <div class="divider-line"></div>
+  <span>✦ ◇ ○ ◇ ✦</span>
+  <div class="divider-line"></div>
+</div>
+
+<section class="section">
+  <span class="section-eyebrow">✦ ¿Es para ti?</span>
+  <h2 class="section-title">Este ebook es<br><em>para ti si...</em></h2>
+  <p class="section-sub">Reconoces alguna de estas situaciones en tu vida.</p>
+
+  <div class="para-quien-grid">
+    <div class="pq-card">
+      <div class="pq-icon">🌀</div>
+      <h3 class="pq-title">Sientes que absorbes la energía de los demás</h3>
+      <p class="pq-text">Después de estar con ciertas personas terminas agotada, irritable o con pensamientos que no reconoces como tuyos.</p>
+    </div>
+    <div class="pq-card">
+      <div class="pq-icon">🪞</div>
+      <h3 class="pq-title">Te cuesta decir que no sin sentirte culpable</h3>
+      <p class="pq-text">Los límites se sienten como rechazo, no como cuidado propio. Y cada vez que los pones, algo en ti se contrae.</p>
+    </div>
+    <div class="pq-card">
+      <div class="pq-icon">🌿</div>
+      <h3 class="pq-title">Sientes que tu paz depende del entorno</h3>
+      <p class="pq-text">Cuando todo está bien afuera, estás bien. Pero cuando hay conflicto o caos, tu centro desaparece rápidamente.</p>
+    </div>
+    <div class="pq-card">
+      <div class="pq-icon">✨</div>
+      <h3 class="pq-title">Quieres herramientas reales, no promesas vacías</h3>
+      <p class="pq-text">Buscas prácticas concretas que puedas aplicar hoy — sin rituales complicados ni lenguaje esotérico inaccesible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENIDO -->
+<section class="section section-noche">
+  <span class="section-eyebrow">✦ Qué encontrarás</span>
+  <h2 class="section-title section-title-light">Los 7 pasos<br><em>del escudo.</em></h2>
+  <p class="section-sub section-sub-light">Una guía secuencial. Cada paso construye sobre el anterior.</p>
+
+  <div class="contenido-grid">
+    <div class="paso">
+      <div class="paso-num">01</div>
+      <h3 class="paso-title">Reconoce tu campo energético</h3>
+      <p class="paso-text">Aprende a identificar cuándo tu energía está íntegra y cuándo está siendo afectada por personas o ambientes.</p>
+    </div>
+    <div class="paso">
+      <div class="paso-num">02</div>
+      <h3 class="paso-title">Identifica tus filtraciones</h3>
+      <p class="paso-text">Descubre los patrones específicos por donde se va tu energía — sin que te des cuenta.</p>
+    </div>
+    <div class="paso">
+      <div class="paso-num">03</div>
+      <h3 class="paso-title">Limpia lo que no es tuyo</h3>
+      <p class="paso-text">Rituales sencillos y técnicas de medicina integrativa para soltar energías que has absorbido del entorno.</p>
+    </div>
+    <div class="paso">
+      <div class="paso-num">04</div>
+      <h3 class="paso-title">Crea límites desde el amor</h3>
+      <p class="paso-text">Aprende a decir que no desde un lugar de paz — no de miedo, no de culpa, sino de claridad y amor propio.</p>
+    </div>
+    <div class="paso">
+      <div class="paso-num">05</div>
+      <h3 class="paso-title">Ancla tu centro</h3>
+      <p class="paso-text">Prácticas de arraigo para volver a ti misma sin importar el caos que haya en tu entorno.</p>
+    </div>
+    <div class="paso">
+      <div class="paso-num">06</div>
+      <h3 class="paso-title">Activa tu escudo</h3>
+      <p class="paso-text">Un ritual de protección energética simple que puedes hacer en 5 minutos — cada mañana o cuando lo necesites.</p>
+    </div>
+    <div class="paso">
+      <div class="paso-num">07</div>
+      <h3 class="paso-title">Vive desde tu centro</h3>
+      <p class="paso-text">Cómo integrar estas prácticas en tu día a día para que la protección se vuelva un estado, no un esfuerzo.</p>
+    </div>
+    <div class="paso" style="background: rgba(201,164,76,0.05);">
+      <div class="paso-num" style="color:rgba(201,164,76,0.4);">✦</div>
+      <h3 class="paso-title" style="color:var(--dorado);">Bonus de lanzamiento</h3>
+      <p class="paso-text">Incluido esta semana: recurso adicional complementario para profundizar tu práctica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-niebla">
+  <span class="section-eyebrow">✦ Preguntas frecuentes</span>
+  <h2 class="section-title">Lo que suelen<br><em>preguntarme.</em></h2>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">¿Necesito experiencia previa en espiritualidad para aprovechar este ebook?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        No. Este ebook está escrito para cualquier mujer — con o sin camino espiritual previo. El lenguaje es accesible y los ejercicios son prácticos desde el día 1. Si eres escéptica, también es para ti: las técnicas tienen base en medicina integrativa, no solo en espiritualidad.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">¿Cuánto tiempo me tomará leer y aplicar el contenido?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        El ebook tiene 36 páginas — puedes leerlo en una tarde. Cada paso incluye un ejercicio concreto que toma entre 5 y 20 minutos. Puedes hacerlo a tu propio ritmo, un paso por día o todos en una semana.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">¿Cómo recibo el ebook después de pagar?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Inmediatamente después de confirmar tu pago en PayPal, recibirás un email en la dirección que usaste — con el link de descarga del PDF. El proceso tarda menos de 5 minutos. Si no ves el email, revisa tu carpeta de spam.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">¿Puedo pagar si estoy en otro país fuera de Colombia?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Sí. El pago se procesa a través de PayPal en USD, así que puedes comprarlo desde cualquier país. El precio equivale a aproximadamente $8.50 USD. Solo necesitas una cuenta PayPal o tarjeta de crédito/débito.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">¿En qué formato viene el ebook?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        El ebook es un archivo PDF de alta calidad, diseñado para leer en pantalla (computador, tablet o celular). También puedes imprimirlo si prefieres trabajar en papel.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">¿Tiene garantía o puedo pedir reembolso?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Dado que es un producto digital de entrega inmediata, no ofrecemos reembolsos una vez descargado. Si tuviste un problema técnico con la descarga o el pago, escríbeme a ousia.essentia2@gmail.com y lo resolvemos de inmediato.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">¿Este ebook es diferente al acompañamiento del Mapa del Alma?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Completamente diferente. Los ebooks son herramientas de autoexploración que puedes trabajar sola, a tu ritmo. El Mapa del Alma es un proceso personalizado de 5 sesiones uno a uno conmigo, donde trabajamos juntas en profundidad tu historia, tu carta natal, tus registros akáshicos y más. Muchas mujeres empiezan con un ebook y luego dan el paso al acompañamiento individual.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <h2 class="cta-title">
+    Tu energía es<br>
+    <em>sagrada.</em>
+  </h2>
+  <p class="cta-sub">Aprende a protegerla. Aprende a volver a ti misma — sin importar lo que pase afuera.</p>
+  <button class="btn-comprar" onclick="abrirModal()" style="position:relative;z-index:2;">Quiero mi ebook ✦</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">OUSIA</span>
+  <span class="footer-copy">© 2026 Valentina Montoya Londoño · Todos los derechos reservados</span>
+  <span class="footer-web">www.ousiaessentia.com</span>
+</footer>
+
+<!-- MODAL PAYPAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <p class="modal-eyebrow">✦ Completa tu compra</p>
+    <h3 class="modal-title">Escudo Interior</h3>
+    <p class="modal-subtitle">7 pasos para proteger tu energía y recuperar tu paz</p>
+    <div class="modal-price">$35.000 COP</div>
+    <p class="modal-bonus-note">+ Bonus de lanzamiento incluido esta semana</p>
+    <div class="modal-divider"></div>
+    <ul class="modal-steps">
+      <li><span class="step-num">1.</span><span>Haz clic en el botón de PayPal y completa el pago de forma segura.</span></li>
+      <li><span class="step-num">2.</span><span>En menos de 5 minutos recibirás un email con el link de descarga de tu PDF.</span></li>
+      <li><span class="step-num">3.</span><span>Descarga, guarda y comienza tu práctica cuando quieras.</span></li>
+    </ul>
+    <div id="paypal-button-container"></div>
+    <div class="modal-security">🔒 Pago 100% seguro procesado por PayPal</div>
+  </div>
+</div>
+
+<!-- PAYPAL SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AfhirgDWN_GS49UBBrgF1dlNIhIHACtpAcV2EFzH7vULupuAvnmUfcRKhrLFRAbWNgbNrbqJUdLjvfPz&currency=USD&locale=es_CO"></script>
+
+<script>
+  // ── FAQ ──
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // ── MODAL ──
+  function abrirModal() {
+    document.getElementById('modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    renderPayPalButton();
+  }
+  function cerrarModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) cerrarModal();
+  });
+
+  // ── PAYPAL ──
+  let paypalRendered = false;
+  function renderPayPalButton() {
+    if (paypalRendered) return;
+    paypalRendered = true;
+    paypal.Buttons({
+      style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay' },
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            description: 'Escudo Interior — Ousia Essentia',
+            amount: { currency_code: 'USD', value: '8.50' }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          const email  = details.payer.email_address;
+          const nombre = details.payer.name.given_name;
+          const orderId = details.id;
+          fetch('https://script.google.com/macros/s/AKfycbzegIP2NaJ9_qAFjV-ELoF78QF7F_f5e07vIBeRulsHG9eD6fTvUe8X-1fZz0q6CNA/exec', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              tipo: 'compra_ebook',
+              ebook: 'Escudo Interior',
+              email, nombre, orderId
+            })
+          });
+          cerrarModal();
+          mostrarConfirmacion(nombre);
+        });
+      },
+      onError: function(err) {
+        console.error('PayPal error:', err);
+        alert('Hubo un problema con el pago. Por favor intenta de nuevo o escríbeme a ousia.essentia2@gmail.com');
+      }
+    }).render('#paypal-button-container');
+  }
+
+  // ── CONFIRMACIÓN ──
+  function mostrarConfirmacion(nombre) {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position:fixed; inset:0; z-index:2000;
+      background:rgba(26,26,16,0.95); backdrop-filter:blur(8px);
+      display:flex; align-items:center; justify-content:center;
+    `;
+    overlay.innerHTML = `
+      <div style="text-align:center; padding:3rem; max-width:400px;">
+        <div style="font-size:2.5rem; margin-bottom:1.5rem; color:#C9A44C;">✦</div>
+        <p style="font-size:0.62rem; letter-spacing:0.4em; text-transform:uppercase; color:#C9A44C; margin-bottom:1rem;">Compra completada</p>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-style:italic; color:#F5F0E8; font-weight:300; margin-bottom:1rem;">¡Gracias, ${nombre}!</h2>
+        <p style="font-size:0.82rem; line-height:1.9; color:rgba(245,240,232,0.5); margin-bottom:2rem;">
+          Tu PDF está en camino. Revisa tu correo en los próximos 5 minutos — incluyendo la carpeta de spam.
+        </p>
+        <button onclick="this.closest('div[style*=fixed]').remove(); document.body.style.overflow=''" style="
+          background:#C9A44C; color:#1A1A10;
+          font-family:'Raleway',sans-serif; font-size:0.7rem; font-weight:500;
+          letter-spacing:0.2em; text-transform:uppercase;
+          padding:0.9rem 2.2rem; border:none; cursor:pointer;
+        ">Cerrar</button>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+  }
+</script>
+
+</body>
+</html>
