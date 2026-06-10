@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca Sagrada — Ousia Essentia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noche:  #1A1A10;
+    --crema:  #F5F0E8;
+    --dorado: #C9A44C;
+    --calido: #E8B857;
+    --niebla: #E9E5D4;
+    --dorado-suave: rgba(201,164,76,0.15);
+    --dorado-borde: rgba(201,164,76,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--crema);
+    color: var(--noche);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.4rem 5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(245,240,232,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--dorado-borde);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 300;
+    letter-spacing: 0.35em; color: var(--noche);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--noche);
+    opacity: 0.55; text-decoration: none; transition: opacity 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--dorado); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--noche);
+    padding: 10rem 6rem 7rem;
+    position: relative; overflow: hidden;
+    text-align: center;
+  }
+  .hero::before {
+    content: 'φ';
+    position: absolute; font-family: 'Cormorant Garamond', serif;
+    font-size: 42rem; font-weight: 300;
+    color: rgba(201,164,76,0.04);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; user-select: none;
+    line-height: 1;
+  }
+  .hero-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.45em;
+    text-transform: uppercase; color: var(--dorado);
+    margin-bottom: 2rem;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 6vw, 6rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--crema); margin-bottom: 1.6rem;
+  }
+  .hero-title em { font-style: italic; color: var(--dorado); }
+  .hero-sub {
+    font-size: 0.9rem; line-height: 1.9;
+    color: rgba(245,240,232,0.5);
+    max-width: 540px; margin: 0 auto 3rem;
+  }
+  .hero-separator {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.2rem; margin-top: 3.5rem;
+  }
+  .hero-separator-line { width: 60px; height: 1px; background: var(--dorado-borde); }
+  .hero-separator span { font-size: 0.65rem; letter-spacing: 0.3em; color: var(--dorado); text-transform: uppercase; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem; padding: 3rem 0;
+    color: var(--dorado); font-size: 0.65rem; letter-spacing: 0.4em;
+  }
+  .divider-line { flex: 1; max-width: 120px; height: 1px; background: var(--dorado-borde); }
+
+  /* ── SECCIÓN DESTACADA ── */
+  .lanzamiento {
+    padding: 6rem 6rem 5rem;
+    background: var(--crema);
+  }
+  .section-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--dorado);
+    margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 300; line-height: 1.15;
+    color: var(--noche); margin-bottom: 0.8rem;
+  }
+  .section-title em { font-style: italic; color: var(--dorado); }
+  .section-sub {
+    font-size: 0.85rem; line-height: 1.9;
+    color: rgba(26,26,16,0.55); max-width: 500px;
+  }
+
+  /* Card principal (lanzamiento) */
+  .card-featured {
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: 0; margin-top: 4rem;
+    border: 1px solid var(--dorado-borde);
+    background: var(--noche);
+    position: relative; overflow: hidden;
+  }
+  .card-featured::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+  }
+  .card-featured-visual {
+    background: linear-gradient(145deg, #1A1A10 0%, #2a2a18 60%, #1a1a10 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 4rem; position: relative; overflow: hidden; min-height: 420px;
+  }
+  .card-featured-visual::after {
+    content: '✦';
+    position: absolute; font-size: 16rem;
+    color: rgba(201,164,76,0.06);
+    bottom: -2rem; right: -2rem;
+  }
+  .card-visual-inner {
+    text-align: center; position: relative; z-index: 2;
+  }
+  .card-visual-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7rem; font-weight: 300;
+    color: rgba(201,164,76,0.18); line-height: 1;
+    margin-bottom: -1.5rem;
+  }
+  .card-visual-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-style: italic; font-weight: 300;
+    color: var(--crema); line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .card-visual-badge {
+    display: inline-block;
+    font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--dorado);
+    border: 1px solid var(--dorado-borde);
+    padding: 0.4rem 1.2rem;
+  }
+  .card-featured-content {
+    padding: 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .badge-lanzamiento {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--noche); background: var(--dorado);
+    padding: 0.4rem 1rem; margin-bottom: 2rem;
+    width: fit-content;
+  }
+  .badge-bonus {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--dorado); border: 1px solid var(--dorado-borde);
+    padding: 0.4rem 1rem; margin-bottom: 1rem;
+    width: fit-content; background: rgba(201,164,76,0.06);
+  }
+  .card-featured-content .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 300; line-height: 1.2;
+    color: var(--crema); margin-bottom: 0.6rem;
+  }
+  .card-featured-content .title em { font-style: italic; color: var(--dorado); }
+  .card-featured-content .subtitle {
+    font-size: 0.8rem; line-height: 1.8;
+    color: rgba(245,240,232,0.45); margin-bottom: 1.8rem;
+  }
+  .card-featured-content .desc {
+    font-size: 0.85rem; line-height: 1.9;
+    color: rgba(245,240,232,0.65); margin-bottom: 2rem;
+  }
+  .includes {
+    list-style: none; margin-bottom: 2.2rem;
+  }
+  .includes li {
+    font-size: 0.78rem; line-height: 1.7;
+    color: rgba(245,240,232,0.55);
+    display: flex; align-items: baseline; gap: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+  .includes li::before { content: '✦'; color: var(--dorado); font-size: 0.55rem; flex-shrink: 0; }
+  .price-block { margin-bottom: 2rem; }
+  .price-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 300; color: var(--crema);
+    line-height: 1;
+  }
+  .price-note {
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: rgba(245,240,232,0.3); text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+  .btn-comprar {
+    display: inline-block;
+    background: var(--dorado);
+    color: var(--noche);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    padding: 1.1rem 2.8rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-comprar:hover { background: var(--calido); transform: translateY(-1px); }
+  .paypal-note {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.65rem; color: rgba(245,240,232,0.25);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── GRID PRÓXIMAMENTE ── */
+  .proximamente {
+    padding: 5rem 6rem 7rem;
+    background: var(--niebla);
+  }
+  .proximos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .card-prox {
+    border: 1px solid rgba(26,26,16,0.1);
+    padding: 2.2rem; background: var(--crema);
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .card-prox:hover { border-color: var(--dorado-borde); }
+  .card-prox::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; width: 2px; height: 0;
+    background: var(--dorado);
+    transition: height 0.4s ease;
+  }
+  .card-prox:hover::before { height: 100%; }
+  .prox-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300;
+    color: rgba(26,26,16,0.06); line-height: 1;
+    margin-bottom: -0.8rem;
+  }
+  .prox-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400; font-style: italic;
+    color: var(--noche); line-height: 1.3; margin-bottom: 0.7rem;
+  }
+  .prox-desc {
+    font-size: 0.75rem; line-height: 1.8;
+    color: rgba(26,26,16,0.5); margin-bottom: 1.4rem;
+  }
+  .prox-tag {
+    font-size: 0.6rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--dorado);
+    opacity: 0.7;
+  }
+
+  /* ── GRATUITOS ── */
+  .gratuitos {
+    padding: 6rem 6rem;
+    background: var(--noche);
+  }
+  .gratuitos .section-title { color: var(--crema); }
+  .gratuitos .section-sub { color: rgba(245,240,232,0.45); }
+  .gratuitos-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .card-gratis {
+    border: 1px solid var(--dorado-borde);
+    padding: 2.2rem; position: relative;
+    background: rgba(201,164,76,0.03);
+    transition: background 0.3s;
+  }
+  .card-gratis:hover { background: rgba(201,164,76,0.07); }
+  .gratis-icon {
+    font-size: 1.6rem; margin-bottom: 1rem;
+  }
+  .gratis-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-style: italic; font-weight: 300;
+    color: var(--crema); line-height: 1.3; margin-bottom: 0.6rem;
+  }
+  .gratis-desc {
+    font-size: 0.75rem; line-height: 1.8;
+    color: rgba(245,240,232,0.45); margin-bottom: 1.5rem;
+  }
+  .btn-gratis {
+    display: inline-block;
+    font-size: 0.65rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--dorado);
+    border: 1px solid var(--dorado-borde);
+    padding: 0.6rem 1.4rem;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-gratis:hover {
+    background: var(--dorado); color: var(--noche);
+  }
+
+  /* ── SUSCRIPCIÓN ── */
+  .suscripcion {
+    padding: 6rem 6rem;
+    background: var(--crema);
+    text-align: center;
+  }
+  .suscripcion-inner {
+    max-width: 520px; margin: 0 auto;
+  }
+  .suscripcion .section-title { margin-bottom: 1rem; }
+  .suscripcion .section-sub { margin: 0 auto 2.5rem; }
+  .form-row {
+    display: flex; gap: 0;
+    border: 1px solid var(--dorado-borde);
+    overflow: hidden; max-width: 420px; margin: 0 auto;
+  }
+  .form-row input {
+    flex: 1; padding: 1rem 1.4rem;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8rem; background: transparent;
+    border: none; outline: none; color: var(--noche);
+  }
+  .form-row input::placeholder { color: rgba(26,26,16,0.35); }
+  .form-row button {
+    padding: 1rem 1.8rem;
+    background: var(--noche); color: var(--dorado);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: background 0.3s;
+    white-space: nowrap;
+  }
+  .form-row button:hover { background: var(--dorado); color: var(--noche); }
+  .form-note {
+    font-size: 0.65rem; color: rgba(26,26,16,0.35);
+    letter-spacing: 0.1em; margin-top: 1rem;
+  }
+
+  /* ── MODAL PAYPAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(26,26,16,0.85); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--noche);
+    border: 1px solid var(--dorado-borde);
+    padding: 3rem;
+    width: 90%; max-width: 480px;
+    position: relative;
+    animation: fadeUp 0.3s ease;
+  }
+  .modal::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+  }
+  .modal-close {
+    position: absolute; top: 1.2rem; right: 1.5rem;
+    background: none; border: none; cursor: pointer;
+    font-size: 1.2rem; color: rgba(245,240,232,0.3);
+    transition: color 0.2s; line-height: 1;
+  }
+  .modal-close:hover { color: var(--crema); }
+  .modal-eyebrow {
+    font-size: 0.6rem; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--dorado);
+    margin-bottom: 1rem;
+  }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-style: italic; font-weight: 300;
+    color: var(--crema); line-height: 1.2; margin-bottom: 0.5rem;
+  }
+  .modal-subtitle {
+    font-size: 0.75rem; line-height: 1.7;
+    color: rgba(245,240,232,0.45); margin-bottom: 0.8rem;
+  }
+  .modal-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: var(--crema); margin-bottom: 0.3rem;
+  }
+  .modal-bonus {
+    font-size: 0.7rem; color: var(--dorado);
+    margin-bottom: 2rem; opacity: 0.8;
+  }
+  .modal-divider {
+    height: 1px; background: var(--dorado-borde); margin-bottom: 2rem;
+  }
+  .modal-steps {
+    list-style: none; margin-bottom: 2rem;
+  }
+  .modal-steps li {
+    display: flex; gap: 1rem; align-items: flex-start;
+    font-size: 0.78rem; line-height: 1.7;
+    color: rgba(245,240,232,0.55); margin-bottom: 0.8rem;
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--dorado);
+    flex-shrink: 0; line-height: 1.4;
+  }
+  #paypal-button-container { margin-top: 0.5rem; }
+  .modal-security {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-top: 1.2rem;
+    font-size: 0.62rem; color: rgba(245,240,232,0.2);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--noche);
+    border-top: 1px solid rgba(201,164,76,0.1);
+    padding: 2rem 6rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; letter-spacing: 0.35em; color: var(--crema);
+  }
+  .footer-copy {
+    font-size: 0.65rem; color: rgba(245,240,232,0.25); letter-spacing: 0.1em;
+  }
+  .footer-web {
+    font-size: 0.65rem; color: rgba(201,164,76,0.5); letter-spacing: 0.1em;
+  }
+
+  /* ── ANIMACIONES ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 8rem 1.5rem 5rem; }
+    .lanzamiento { padding: 4rem 1.5rem; }
+    .card-featured { grid-template-columns: 1fr; }
+    .card-featured-visual { min-height: 280px; padding: 3rem; }
+    .card-featured-content { padding: 2.5rem 1.5rem; }
+    .proximamente { padding: 4rem 1.5rem 5rem; }
+    .proximos-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .gratuitos { padding: 4rem 1.5rem; }
+    .gratuitos-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .suscripcion { padding: 4rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+    .modal { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">OUSIA</a>
+  <ul class="nav-links">
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/#servicios">Servicios</a></li>
+    <li><a href="/biblioteca" style="color:var(--dorado); opacity:1;">Biblioteca</a></li>
+    <li><a href="/#contacto">Reservar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">✦ Ousia Essentia · Biblioteca Sagrada</p>
+  <h1 class="hero-title">
+    Sabiduría que puedes<br>
+    <em>llevar contigo.</em>
+  </h1>
+  <p class="hero-sub">
+    Guías prácticas para mujeres en camino de despertar. Cada ebook es una puerta — a tu intuición, a tu energía, a tu esencia más profunda.
+  </p>
+  <div class="hero-separator">
+    <div class="hero-separator-line"></div>
+    <span>✦ ◇ ○ ◇ ✦</span>
+    <div class="hero-separator-line"></div>
+  </div>
+</section>
+
+<!-- LANZAMIENTO -->
+<section class="lanzamiento">
+  <span class="section-eyebrow">✦ Disponible ahora</span>
+  <h2 class="section-title">El primer portal<br><em>ya está abierto.</em></h2>
+  <p class="section-sub">Una guía completa para proteger tu campo energético y recuperar la paz que siempre fue tuya.</p>
+
+  <div class="card-featured">
+    <!-- Visual -->
+    <div class="card-featured-visual">
+      <div class="card-visual-inner">
+        <div class="card-visual-num">01</div>
+        <div class="card-visual-title">Escudo<br>Interior</div>
+        <div class="card-visual-badge">✦ Ebook · PDF</div>
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div class="card-featured-content">
+      <span class="badge-lanzamiento">✦ Lanzamiento — Semana 1</span>
+      <span class="badge-bonus">+ Bonus de lanzamiento incluido</span>
+      <h3 class="title"><em>Escudo Interior</em></h3>
+      <p class="subtitle">7 pasos para proteger tu energía y recuperar tu paz</p>
+      <p class="desc">
+        Aprende a reconocer cuándo tu energía está siendo drenada, cómo crear límites desde el amor y no desde el miedo, y qué prácticas concretas pueden devolverte a tu centro — sin importar el caos que haya afuera.
+      </p>
+      <ul class="includes">
+        <li>7 pasos prácticos con ejercicios aplicables desde el día 1</li>
+        <li>Técnicas de protección energética con base en medicina integrativa</li>
+        <li>Rituales simples para recuperar tu paz interior</li>
+        <li>Descarga instantánea en PDF</li>
+      </ul>
+      <div class="price-block">
+        <div class="price-main">$35.000 COP</div>
+        <div class="price-note">Descarga inmediata · Pago seguro vía PayPal</div>
+      </div>
+      <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+        <button class="btn-comprar" onclick="abrirModal()">Quiero este ebook ✦</button>
+        <a href="/biblioteca/escudo-interior" style="font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,240,232,0.4); text-decoration:none; border-bottom:1px solid rgba(201,164,76,0.25); padding-bottom:2px; transition:color 0.3s;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='rgba(245,240,232,0.4)'">Conocer más →</a>
+      </div>
+      <div class="paypal-note">🔒 Pago procesado por PayPal · Recibes el PDF por email</div>
+    </div>
+  </div>
+</section>
+
+<!-- GRATUITOS -->
+<section class="gratuitos">
+  <span class="section-eyebrow">✦ Para empezar</span>
+  <h2 class="section-title" style="color:var(--crema);">Tres regalos<br><em>para tu camino.</em></h2>
+  <p class="section-sub">Sin costo. Sin compromiso. Solo herramientas reales para mujeres que están despertando.</p>
+
+  <div class="gratuitos-grid">
+
+    <div class="card-gratis">
+      <div class="gratis-icon">🌑</div>
+      <h3 class="gratis-title">Rituales de Luna Nueva</h3>
+      <p class="gratis-desc">5 prácticas para sembrar intenciones en el momento más poderoso del mes.</p>
+      <a href="#suscribete" class="btn-gratis">Recibir gratis ✦</a>
+    </div>
+
+    <div class="card-gratis">
+      <div class="gratis-icon">☀️</div>
+      <h3 class="gratis-title">5 Rituales de Lunes</h3>
+      <p class="gratis-desc">Para empezar la semana desde tu centro y con intención clara.</p>
+      <a href="#suscribete" class="btn-gratis">Recibir gratis ✦</a>
+    </div>
+
+    <div class="card-gratis">
+      <div class="gratis-icon">🌙</div>
+      <h3 class="gratis-title">Meditaciones para Dormir</h3>
+      <p class="gratis-desc">5 prácticas para soltar el día y descansar desde el alma.</p>
+      <a href="#suscribete" class="btn-gratis">Recibir gratis ✦</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SUSCRIPCIÓN -->
+<section class="suscripcion" id="suscribete">
+  <div class="suscripcion-inner">
+    <span class="section-eyebrow">✦ Sé la primera en saberlo</span>
+    <h2 class="section-title">Recibe cada<br><em>lanzamiento.</em></h2>
+    <p class="section-sub">Un ebook nuevo cada semana. Suscríbete y te lo enviamos directo a tu correo — junto con los recursos gratuitos para comenzar.</p>
+    <div class="form-row">
+      <input type="email" id="email-sub" placeholder="tu@correo.com" />
+      <button onclick="suscribirse()">Suscribirme</button>
+    </div>
+    <p class="form-note" id="form-msg">Sin spam. Solo sabiduría cuando la necesitas.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">OUSIA</span>
+  <span class="footer-copy">© 2026 Valentina Montoya Londoño · Todos los derechos reservados</span>
+  <span class="footer-web">www.ousiaessentia.com</span>
+</footer>
+
+<!-- MODAL PAYPAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <p class="modal-eyebrow">✦ Completa tu compra</p>
+    <h3 class="modal-title">Escudo Interior</h3>
+    <p class="modal-subtitle">7 pasos para proteger tu energía y recuperar tu paz</p>
+    <div class="modal-price">$35.000 COP</div>
+    <p class="modal-bonus">+ Bonus de lanzamiento incluido esta semana</p>
+    <div class="modal-divider"></div>
+    <ul class="modal-steps">
+      <li>
+        <span class="step-num">1.</span>
+        <span>Haz clic en el botón de PayPal y completa el pago de forma segura.</span>
+      </li>
+      <li>
+        <span class="step-num">2.</span>
+        <span>En menos de 5 minutos recibirás un email con el link de descarga de tu PDF.</span>
+      </li>
+      <li>
+        <span class="step-num">3.</span>
+        <span>Descarga, guarda y comienza tu práctica cuando quieras.</span>
+      </li>
+    </ul>
+
+    <!-- Aquí va el botón de PayPal -->
+    <div id="paypal-button-container"></div>
+
+    <div class="modal-security">🔒 Pago 100% seguro procesado por PayPal</div>
+  </div>
+</div>
+
+<!-- PAYPAL SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AfhirgDWN_GS49UBBrgF1dlNIhIHACtpAcV2EFzH7vULupuAvnmUfcRKhrLFRAbWNgbNrbqJUdLjvfPz&currency=USD&locale=es_CO"></script>
+
+<script>
+  // ── MODAL ──
+  function abrirModal() {
+    document.getElementById('modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    renderPayPalButton();
+  }
+  function cerrarModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) cerrarModal();
+  });
+
+  // ── PAYPAL BUTTON ──
+  let paypalRendered = false;
+  function renderPayPalButton() {
+    if (paypalRendered) return;
+    paypalRendered = true;
+
+    paypal.Buttons({
+      style: {
+        layout: 'vertical',
+        color:  'gold',
+        shape:  'rect',
+        label:  'pay'
+      },
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            description: 'Escudo Interior — Ousia Essentia',
+            amount: {
+              currency_code: 'USD',
+              // $35.000 COP ≈ $8.50 USD — actualiza según la tasa del momento
+              value: '8.50'
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          // Enviar notificación al backend (Google Apps Script)
+          const email = details.payer.email_address;
+          const nombre = details.payer.name.given_name;
+          const orderId = details.id;
+
+          fetch('https://script.google.com/macros/s/AKfycbzegIP2NaJ9_qAFjV-ELoF78QF7F_f5e07vIBeRulsHG9eD6fTvUe8X-1fZz0q6CNA/exec', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              tipo: 'compra_ebook',
+              ebook: 'Escudo Interior',
+              email: email,
+              nombre: nombre,
+              orderId: orderId
+            })
+          });
+
+          // Mensaje de confirmación
+          cerrarModal();
+          mostrarConfirmacion(nombre);
+        });
+      },
+      onError: function(err) {
+        console.error('PayPal error:', err);
+        alert('Hubo un problema con el pago. Por favor intenta de nuevo o escríbeme a ousia.essentia2@gmail.com');
+      }
+    }).render('#paypal-button-container');
+  }
+
+  // ── CONFIRMACIÓN ──
+  function mostrarConfirmacion(nombre) {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position:fixed; inset:0; z-index:2000;
+      background:rgba(26,26,16,0.92);
+      display:flex; align-items:center; justify-content:center;
+      backdrop-filter:blur(8px);
+    `;
+    overlay.innerHTML = `
+      <div style="text-align:center; padding:3rem; max-width:400px;">
+        <div style="font-size:2.5rem; margin-bottom:1.5rem;">✦</div>
+        <p style="font-size:0.65rem; letter-spacing:0.4em; text-transform:uppercase; color:#C9A44C; margin-bottom:1rem;">Compra completada</p>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-style:italic; color:#F5F0E8; font-weight:300; margin-bottom:1rem;">
+          ¡Gracias, ${nombre}!
+        </h2>
+        <p style="font-size:0.82rem; line-height:1.9; color:rgba(245,240,232,0.55); margin-bottom:2rem;">
+          Tu PDF está en camino. Revisa tu correo en los próximos 5 minutos — incluyendo la carpeta de spam.
+        </p>
+        <button onclick="this.closest('div[style]').remove(); document.body.style.overflow=''" style="
+          background:#C9A44C; color:#1A1A10;
+          font-family:'Raleway',sans-serif; font-size:0.7rem;
+          font-weight:500; letter-spacing:0.2em; text-transform:uppercase;
+          padding:0.9rem 2.2rem; border:none; cursor:pointer;
+        ">Cerrar</button>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+  }
+
+  // ── SUSCRIPCIÓN ──
+  function suscribirse() {
+    const email = document.getElementById('email-sub').value.trim();
+    const msg = document.getElementById('form-msg');
+    if (!email || !email.includes('@')) {
+      msg.textContent = 'Por favor ingresa un correo válido.';
+      msg.style.color = '#E8B857';
+      return;
+    }
+    // Enviar a Google Apps Script
+    fetch('https://script.google.com/macros/s/AKfycbzegIP2NaJ9_qAFjV-ELoF78QF7F_f5e07vIBeRulsHG9eD6fTvUe8X-1fZz0q6CNA/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tipo: 'suscripcion_ebooks', email: email })
+    }).then(() => {
+      msg.textContent = '✦ ¡Listo! Te escribimos con el primer recurso.';
+      msg.style.color = '#C9A44C';
+      document.getElementById('email-sub').value = '';
+    }).catch(() => {
+      msg.textContent = 'Algo salió mal. Escríbenos a ousia.essentia2@gmail.com';
+      msg.style.color = '#E8B857';
+    });
+  }
+
+  // Enter en el campo de suscripción
+  document.getElementById('email-sub').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') suscribirse();
+  });
+</script>
+
+</body>
+</html>
