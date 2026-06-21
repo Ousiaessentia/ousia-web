@@ -378,24 +378,6 @@
     margin: 1.8rem 0 2.2rem;
   }
 
-  /* ─── PILARES ─── */
-  .pilares {
-    padding: 6rem 6rem;
-    background: var(--niebla);
-    position: relative;
-    overflow: hidden;
-  }
-  .pilares::after {
-    content: 'Ψ';
-    position: absolute;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26rem;
-    color: rgba(201,164,76,0.05);
-    bottom: -4rem;
-    right: -2rem;
-    pointer-events: none;
-    user-select: none;
-  }
   .pilares-header {
     text-align: center;
     margin-bottom: 4rem;
@@ -420,50 +402,6 @@
     color: var(--dorado);
     letter-spacing: 0.6em;
     margin: 1.5rem 0 0;
-  }
-  .pilares-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1px;
-    background: rgba(201,164,76,0.12);
-  }
-  .pilar-card {
-    background: var(--niebla);
-    padding: 2.5rem 1.6rem;
-    text-align: center;
-    transition: background 0.35s;
-    position: relative;
-    overflow: hidden;
-  }
-  .pilar-card:hover { background: var(--crema); }
-  .pilar-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 20%; right: 20%;
-    height: 1px;
-    background: var(--dorado);
-    transform: scaleX(0);
-    transition: transform 0.4s;
-  }
-  .pilar-card:hover::after { transform: scaleX(1); }
-  .pilar-icon {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    color: rgba(201,164,76,0.35);
-    margin-bottom: 1rem;
-    display: block;
-  }
-  .pilar-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--noche);
-    margin-bottom: 0.5rem;
-  }
-  .pilar-desc {
-    font-size: 0.72rem;
-    line-height: 1.8;
-    color: #7a6040;
   }
 
   /* ─── TESTIMONIOS ─── */
@@ -961,8 +899,6 @@
     .hero-left { padding: 7rem 2rem 5rem; }
     .sobre { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
     .mapa-teaser { padding: 5rem 2rem; }
-    .pilares { padding: 5rem 2rem; }
-    .pilares-grid { grid-template-columns: repeat(2, 1fr); }
     .testimonios { padding: 5rem 2rem; }
     .testimonios-grid { grid-template-columns: 1fr; }
     .footer-cta { padding: 5rem 2rem; }
@@ -1081,42 +1017,6 @@
       Un proceso de 5 sesiones que integra numerología, astrología, tarot, registros akáshicos y medicina integrativa — para que entiendas quién eres y hacia dónde te llama tu alma en este ciclo.
     </p>
     <a href="/mapa-del-alma" class="btn-primary">Conoce el Mapa del Alma →</a>
-  </div>
-</section>
-
-<!-- PILARES -->
-<section class="pilares">
-  <div class="pilares-header">
-    <p class="section-eyebrow">✦ Disciplinas que integra</p>
-    <h2 class="section-title">Un mapa completo<br><em>del ser.</em></h2>
-    <div class="section-diamond">✦ ◇ ○ ◇ ✦</div>
-  </div>
-  <div class="pilares-grid">
-    <div class="pilar-card">
-      <span class="pilar-icon">∞</span>
-      <p class="pilar-name">Numerología</p>
-      <p class="pilar-desc">Tu camino de vida, ciclos personales y patrones que tu alma vino a transitar.</p>
-    </div>
-    <div class="pilar-card">
-      <span class="pilar-icon">☽</span>
-      <p class="pilar-name">Astrología</p>
-      <p class="pilar-desc">Carta natal, nodos lunares y los ciclos cósmicos activos en tu vida ahora.</p>
-    </div>
-    <div class="pilar-card">
-      <span class="pilar-icon">✦</span>
-      <p class="pilar-name">Tarot</p>
-      <p class="pilar-desc">Lectura simbólica como espejo del alma — claridad para este momento de vida.</p>
-    </div>
-    <div class="pilar-card">
-      <span class="pilar-icon">φ</span>
-      <p class="pilar-name">Registros Akáshicos</p>
-      <p class="pilar-desc">Acceso al libro del alma — contratos, propósito y mensajes de tu historia más profunda.</p>
-    </div>
-    <div class="pilar-card">
-      <span class="pilar-icon">⊕</span>
-      <p class="pilar-name">Medicina Integrativa</p>
-      <p class="pilar-desc">El cuerpo como mapa. Herramientas concretas de bienestar y manejo del estrés.</p>
-    </div>
   </div>
 </section>
 
