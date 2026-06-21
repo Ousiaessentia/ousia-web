@@ -75,6 +75,35 @@
     opacity: 0.5; text-decoration: none; transition: opacity 0.3s;
   }
   .nav-links a:hover { opacity: 1; color: var(--dorado); }
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px; height: 22px;
+    background: none; border: none; cursor: pointer;
+    padding: 0;
+    z-index: 101;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 100%; height: 1.5px;
+    background: var(--noche);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,16,0.4);
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .nav-overlay.open { display: block; opacity: 1; }
   .nav-back {
     font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--dorado); text-decoration: none;
@@ -475,7 +504,23 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: min(280px, 80vw);
+      background: var(--crema);
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.35s ease;
+      box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+    }
+    .nav-links.open { transform: translateX(0); }
     .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; gap: 3rem; min-height: auto; }
     .hero::before { display: none; }
     .hero-cover { min-height: 380px; padding: 3rem 2rem; }
@@ -496,13 +541,17 @@
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">OUSIA</a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="/">Inicio</a></li>
     <li><a href="/biblioteca" style="color:var(--dorado); opacity:1;">Biblioteca</a></li>
-    <li><a href="/#contacto">Reservar</a></li>
+    <li><a href="/mapa-del-alma#inscripcion">Reservar</a></li>
   </ul>
   <a href="/biblioteca" class="nav-back">← Biblioteca</a>
 </nav>
+<div class="nav-overlay" id="navOverlay"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -847,6 +896,31 @@
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
   }
+
+  // ── MENÚ MÓVIL ──
+  (function () {
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    const overlay = document.getElementById('navOverlay');
+    if (!toggle || !links) return;
+
+    function closeMenu() {
+      links.classList.remove('open');
+      toggle.classList.remove('open');
+      overlay.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = links.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      overlay.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    overlay.addEventListener('click', closeMenu);
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  })();
 </script>
 
 </body>
