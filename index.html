@@ -364,19 +364,167 @@
     color: rgba(245,240,232,0.58);
   }
 
-  /* ─── MAPA DEL ALMA (teaser) ─── */
-  .mapa-teaser {
+  /* ─── TEASERS (Mapa del Alma, Brújula Interior, Biblioteca) ─── */
+  .teaser {
     padding: 6rem 6rem;
-    background: var(--crema);
     text-align: center;
   }
-  .mapa-teaser-inner { max-width: 640px; margin: 0 auto; }
-  .mapa-teaser-desc {
+  .teaser--crema { background: var(--crema); }
+  .teaser-inner { max-width: 640px; margin: 0 auto; }
+  .teaser-desc {
     font-size: 0.9rem;
     line-height: 2;
     color: #5a4a32;
     margin: 1.8rem 0 2.2rem;
   }
+
+  /* ─── BRÚJULA INTERIOR (expandida) ─── */
+  .brujula-section {
+    padding: 6rem 6rem;
+    background: var(--niebla);
+  }
+  .brujula-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .brujula-cover {
+    background: var(--noche);
+    border: 1px solid rgba(201,164,76,0.3);
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .brujula-cover::before {
+    content: '✦';
+    position: absolute;
+    top: -10px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem;
+    color: rgba(201,164,76,0.08);
+  }
+  .brujula-cover-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1.6rem;
+  }
+  .brujula-cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 2.1rem;
+    color: var(--crema);
+    line-height: 1.25;
+    margin-bottom: 1.4rem;
+  }
+  .brujula-cover-rule {
+    width: 40px; height: 1px;
+    background: var(--dorado);
+    margin: 0 auto 1.4rem;
+  }
+  .brujula-cover-sub {
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.7;
+  }
+  .brujula-cover-price {
+    margin-top: 1.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--dorado);
+  }
+  .brujula-content { text-align: left; }
+  .brujula-tagline {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #5a4a32;
+    margin: 1.4rem 0 2rem;
+  }
+  .brujula-incluye {
+    margin-bottom: 2.2rem;
+  }
+  .brujula-incluye-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1rem;
+  }
+  .brujula-incluye-item {
+    display: flex;
+    gap: 0.7rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(201,164,76,0.18);
+    font-size: 0.85rem;
+    color: var(--noche);
+    line-height: 1.6;
+  }
+  .brujula-incluye-item span.check { color: var(--dorado); flex-shrink: 0; }
+
+  /* ─── BIBLIOTECA (expandida) ─── */
+  .biblioteca-section {
+    padding: 6rem 6rem;
+    background: var(--crema);
+  }
+  .biblioteca-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 3.5rem;
+  }
+  .biblioteca-grid {
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .biblioteca-card {
+    background: var(--noche);
+    border: 1px solid rgba(201,164,76,0.25);
+    padding: 2.8rem 2.4rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .biblioteca-card:hover {
+    border-color: var(--dorado);
+    transform: translateY(-3px);
+  }
+  .biblioteca-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    color: rgba(201,164,76,0.3);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .biblioteca-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--crema);
+    margin-bottom: 0.7rem;
+  }
+  .biblioteca-card-desc {
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.55);
+    margin-bottom: 1.4rem;
+  }
+  .biblioteca-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+  .biblioteca-card-price { color: var(--dorado); font-weight: 600; }
+  .biblioteca-card-link { color: rgba(245,240,232,0.5); }
+  .biblioteca-cta { text-align: center; }
 
   .pilares-header {
     text-align: center;
@@ -898,7 +1046,7 @@
     .hero-right { display: none; }
     .hero-left { padding: 7rem 2rem 5rem; }
     .sobre { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
-    .mapa-teaser { padding: 5rem 2rem; }
+    .teaser { padding: 5rem 2rem; }
     .testimonios { padding: 5rem 2rem; }
     .testimonios-grid { grid-template-columns: 1fr; }
     .footer-cta { padding: 5rem 2rem; }
@@ -908,6 +1056,10 @@
     .onirya-visual { align-items: center; }
     .onirya-features { grid-template-columns: 1fr 1fr; }
     .entrelunas { padding: 5rem 2rem; }
+    .brujula-section { padding: 5rem 2rem; }
+    .brujula-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .biblioteca-section { padding: 5rem 2rem; }
+    .biblioteca-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1009,11 +1161,11 @@
 <div class="divider divider-dark">✦ &nbsp; ◇ &nbsp; ○ &nbsp; ◇ &nbsp; ✦</div>
 
 <!-- MAPA DEL ALMA (teaser) -->
-<section class="mapa-teaser" id="mapa">
-  <div class="mapa-teaser-inner">
+<section class="teaser teaser--crema" id="mapa">
+  <div class="teaser-inner">
     <p class="section-eyebrow">✦ Servicio principal</p>
     <h2 class="section-title">Mapa <em>del Alma</em></h2>
-    <p class="mapa-teaser-desc">
+    <p class="teaser-desc">
       Un proceso de 5 sesiones que integra numerología, astrología, tarot, registros akáshicos y medicina integrativa — para que entiendas quién eres y hacia dónde te llama tu alma en este ciclo.
     </p>
     <a href="/mapa-del-alma" class="btn-primary">Conoce el Mapa del Alma →</a>
@@ -1054,6 +1206,79 @@
   </div>
   <div style="text-align:center; margin-top:3rem; position:relative; z-index:2;">
     <a href="/mapa-del-alma" class="btn-onirya">Conoce el Mapa del Alma →</a>
+  </div>
+</section>
+
+<div class="divider">✦ &nbsp; ◇ &nbsp; ○ &nbsp; ◇ &nbsp; ✦</div>
+
+<!-- BRÚJULA INTERIOR -->
+<section class="brujula-section" id="brujula">
+  <div class="brujula-inner">
+
+    <div class="brujula-cover">
+      <p class="brujula-cover-eyebrow">Ousia Essentia</p>
+      <div class="brujula-cover-title">Brújula<br>Interior</div>
+      <div class="brujula-cover-rule"></div>
+      <p class="brujula-cover-sub">Sesión de canalización en vivo<br>20–30 minutos</p>
+      <div class="brujula-cover-price">$20 USD</div>
+    </div>
+
+    <div class="brujula-content">
+      <p class="section-eyebrow">✦ Sesión individual</p>
+      <h2 class="section-title">¿Perdiste<br><em>el norte?</em></h2>
+      <p class="brujula-tagline">
+        Un espacio de canalización para los momentos en que necesitas claridad inmediata — no un proceso largo, solo una dirección clara para el paso siguiente.
+      </p>
+
+      <div class="brujula-incluye">
+        <p class="brujula-incluye-label">Incluye</p>
+        <div class="brujula-incluye-item"><span class="check">✦</span> Sesión de channeling en vivo, por videollamada (20–30 min)</div>
+        <div class="brujula-incluye-item"><span class="check">✦</span> Cuestionario previo para llegar enfocada a la sesión</div>
+        <div class="brujula-incluye-item"><span class="check">✦</span> Ebook de regalo: Escudo Interior</div>
+      </div>
+
+      <a href="/brujula-interior" class="btn-primary">Conoce Brújula Interior →</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider">✦ &nbsp; ◇ &nbsp; ○ &nbsp; ◇ &nbsp; ✦</div>
+
+<!-- BIBLIOTECA -->
+<section class="biblioteca-section" id="biblioteca">
+  <div class="biblioteca-header">
+    <p class="section-eyebrow">✦ Recursos descargables</p>
+    <h2 class="section-title">Biblioteca <em>Sagrada</em></h2>
+    <p class="teaser-desc" style="margin-bottom:0;">
+      Ebooks y rituales prácticos para proteger tu energía, conectar con tu intuición y acompañarte fuera de las sesiones.
+    </p>
+  </div>
+
+  <div class="biblioteca-grid">
+    <a href="/biblioteca/escudo-interior" class="biblioteca-card">
+      <div class="biblioteca-card-num">01</div>
+      <div class="biblioteca-card-title">Escudo Interior</div>
+      <p class="biblioteca-card-desc">7 pasos para proteger tu energía y recuperar tu paz.</p>
+      <div class="biblioteca-card-footer">
+        <span class="biblioteca-card-price">$35.000 COP</span>
+        <span class="biblioteca-card-link">Ver ebook →</span>
+      </div>
+    </a>
+
+    <a href="/biblioteca/limpia-tu-campo" class="biblioteca-card">
+      <div class="biblioteca-card-num">02</div>
+      <div class="biblioteca-card-title">Limpia tu Campo</div>
+      <p class="biblioteca-card-desc">7 rituales para soltar lo que ya no te pertenece.</p>
+      <div class="biblioteca-card-footer">
+        <span class="biblioteca-card-price">$35.000 COP</span>
+        <span class="biblioteca-card-link">Ver ebook →</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="biblioteca-cta">
+    <a href="/biblioteca" class="btn-primary">Explora toda la Biblioteca →</a>
   </div>
 </section>
 
