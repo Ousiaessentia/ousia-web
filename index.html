@@ -1303,6 +1303,117 @@
     line-height: 1.75;
   }
 
+  /* ─── ENTRE LUNAS ─── */
+  .entrelunas {
+    padding: 6rem 6rem;
+    background: var(--crema);
+    position: relative;
+    overflow: hidden;
+  }
+  .entrelunas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,164,76,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .entrelunas-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .entrelunas-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1.4rem;
+  }
+  .entrelunas-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 4vw, 4rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    color: var(--noche);
+    margin-bottom: 1.4rem;
+  }
+  .entrelunas-title em { color: var(--dorado); font-style: italic; }
+  .entrelunas-desc {
+    font-size: 0.92rem;
+    line-height: 2;
+    color: #5a4a32;
+    max-width: 480px;
+    margin: 0 auto 2.6rem;
+  }
+  .entrelunas-form {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .entrelunas-form-row {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.9rem;
+  }
+  .entrelunas-input {
+    flex: 1;
+    min-width: 180px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(201,164,76,0.35);
+    color: var(--noche);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    padding: 0.9rem 1.1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 0;
+  }
+  .entrelunas-input::placeholder { color: rgba(26,26,16,0.32); }
+  .entrelunas-input:focus { border-color: var(--dorado); }
+  .btn-entrelunas {
+    padding: 1rem 2.2rem;
+    background: var(--noche);
+    color: var(--crema);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.35s;
+    white-space: nowrap;
+  }
+  .btn-entrelunas:hover { background: var(--dorado); }
+  .btn-entrelunas:disabled { opacity: 0.5; cursor: default; }
+  .entrelunas-note {
+    font-size: 0.62rem;
+    color: var(--texto-medio);
+    font-style: italic;
+    letter-spacing: 0.08em;
+  }
+  .entrelunas-success {
+    display: none;
+  }
+  .entrelunas-success-icon {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--dorado);
+    letter-spacing: 0.5em;
+    margin-bottom: 0.9rem;
+  }
+  .entrelunas-success-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--noche);
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .entrelunas-success-text em { color: var(--dorado); }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 960px) {
     nav { padding: 1.2rem 2rem; }
@@ -1327,6 +1438,7 @@
     .onirya-header { grid-template-columns: 1fr; gap: 3rem; }
     .onirya-visual { align-items: center; }
     .onirya-features { grid-template-columns: 1fr 1fr; }
+    .entrelunas { padding: 5rem 2rem; }
   }
 </style>
 </head>
@@ -1340,6 +1452,7 @@
     <li><a href="#mapa">Mapa del Alma</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
     <li><a href="#onirya">Onirya</a></li>
+    <li><a href="/brujula-interior">Brújula Interior</a></li>
  <li><a href="/biblioteca">Biblioteca</a></li>
     <li><a href="#inscripcion" class="nav-cta">Iniciar mi viaje</a></li>
   </ul>
@@ -1656,6 +1769,34 @@
 
 <div class="divider">✦ &nbsp; ◇ &nbsp; ○ &nbsp; ◇ &nbsp; ✦</div>
 
+<!-- ENTRE LUNAS -->
+<section class="entrelunas" id="entrelunas">
+  <div class="entrelunas-inner">
+    <p class="entrelunas-eyebrow">✦ Newsletter de Ousia Essentia</p>
+    <h2 class="entrelunas-title">Entre <em>Lunas</em></h2>
+    <p class="entrelunas-desc">
+      Una carta que llega solo dos veces al mes — en Luna Nueva y en Luna Llena. Reflexión, acompañamiento y, de vez en cuando, alguna novedad. Nada de ruido, nada de prisa.
+    </p>
+
+    <div class="entrelunas-form" id="entrelunasForm">
+      <form id="entrelunasFormEl" method="POST" action="https://1d46bac1.sibforms.com/serve/MUIFAHySRcDyPzaui1NmILQjpdXINmwkqJN5SGjFbKMmfAiGfnMIw7K5iyR2uBY5JU1KSZ3H39HEkP5UVeK7Rjz1ac0sCtbWn9BMIMPfzc6Pruf3R-PCSLOdL_5Xx2BdoZoR3JoUUZaLfuBleBctEcxCW7AoXBvmAEu-lV0XrwNyap44bGx7T_wmfrAI9PCzlzuqCRlDp52xnodjbA==" target="entrelunasFrame">
+        <div class="entrelunas-form-row">
+          <input class="entrelunas-input" type="email" id="EMAIL" name="EMAIL" placeholder="tu@correo.com" autocomplete="email" required />
+          <button class="btn-entrelunas" type="submit" id="entrelunasBtn">Suscribirme →</button>
+        </div>
+      </form>
+      <span class="entrelunas-note">Sin compromiso · Dos cartas al mes · Cancela cuando quieras</span>
+    </div>
+    <div class="entrelunas-success" id="entrelunasSuccess">
+      <span class="entrelunas-success-icon">✦ ◇ ○ ◇ ✦</span>
+      <p class="entrelunas-success-text">Ya estás <em>entre lunas.</em><br>Nos escribimos en la próxima fase.</p>
+    </div>
+    <iframe name="entrelunasFrame" id="entrelunasFrame" style="display:none;"></iframe>
+  </div>
+</section>
+
+<div class="divider">✦ &nbsp; ◇ &nbsp; ○ &nbsp; ◇ &nbsp; ✦</div>
+
 <!-- INSCRIPCIÓN -->
 <section class="inscripcion" id="inscripcion">
   <div class="inscripcion-inner">
@@ -1866,6 +2007,30 @@
       });
     });
   });
+
+  // ── ENTRE LUNAS ──
+  (function () {
+    const form = document.getElementById('entrelunasFormEl');
+    const frame = document.getElementById('entrelunasFrame');
+    const formBox = document.getElementById('entrelunasForm');
+    const success = document.getElementById('entrelunasSuccess');
+    const btn = document.getElementById('entrelunasBtn');
+    if (!form) return;
+
+    let submitted = false;
+
+    form.addEventListener('submit', () => {
+      submitted = true;
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+    });
+
+    frame.addEventListener('load', () => {
+      if (!submitted) return; // ignora la carga inicial en blanco del iframe
+      formBox.style.display = 'none';
+      success.style.display = 'block';
+    });
+  })();
 
   async function enviarOnirya() {
     const email = document.getElementById('oniryaEmail').value.trim();
