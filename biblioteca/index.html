@@ -649,21 +649,21 @@
       <div class="gratis-icon">🌑</div>
       <h3 class="gratis-title">Rituales de Luna Nueva</h3>
       <p class="gratis-desc">5 prácticas para sembrar intenciones en el momento más poderoso del mes.</p>
-      <a href="#suscribete" class="btn-gratis">Recibir gratis ✦</a>
+      <a href="#suscribete" class="btn-gratis" onclick="irASuscripcion('Rituales de Luna Nueva')">Recibir gratis ✦</a>
     </div>
 
     <div class="card-gratis">
       <div class="gratis-icon">☀️</div>
       <h3 class="gratis-title">5 Rituales de Lunes</h3>
       <p class="gratis-desc">Para empezar la semana desde tu centro y con intención clara.</p>
-      <a href="#suscribete" class="btn-gratis">Recibir gratis ✦</a>
+      <a href="#suscribete" class="btn-gratis" onclick="irASuscripcion('5 Rituales de Lunes')">Recibir gratis ✦</a>
     </div>
 
     <div class="card-gratis">
       <div class="gratis-icon">🌙</div>
       <h3 class="gratis-title">Meditaciones para Dormir</h3>
       <p class="gratis-desc">5 prácticas para soltar el día y descansar desde el alma.</p>
-      <a href="#suscribete" class="btn-gratis">Recibir gratis ✦</a>
+      <a href="#suscribete" class="btn-gratis" onclick="irASuscripcion('Meditaciones para Dormir')">Recibir gratis ✦</a>
     </div>
 
   </div>
@@ -673,8 +673,8 @@
 <section class="suscripcion" id="suscribete">
   <div class="suscripcion-inner">
     <span class="section-eyebrow">✦ Sé la primera en saberlo</span>
-    <h2 class="section-title">Recibe cada<br><em>lanzamiento.</em></h2>
-    <p class="section-sub">Un ebook nuevo cada semana. Suscríbete y te lo enviamos directo a tu correo — junto con los recursos gratuitos para comenzar.</p>
+    <h2 class="section-title" id="suscripcion-titulo">Recibe cada<br><em>lanzamiento.</em></h2>
+    <p class="section-sub" id="suscripcion-sub">Un ebook nuevo cada semana. Suscríbete y te lo enviamos directo a tu correo — junto con los recursos gratuitos para comenzar.</p>
     <div class="form-row">
       <input type="email" id="email-sub" placeholder="tu@correo.com" />
       <button onclick="suscribirse()">Suscribirme</button>
@@ -827,6 +827,27 @@
     document.body.style.overflow = 'hidden';
   }
 
+  // ── LEAD MAGNETS — recurso seleccionado ──
+  // Guarda qué botón "Recibir gratis" se clickeó, y actualiza el título
+  // de la sección de suscripción para que la persona vea que está pidiendo
+  // exactamente lo que clickeó (en vez del mensaje genérico de newsletter).
+  const LEAD_MAGNETS_DESC = {
+    'Rituales de Luna Nueva': '5 prácticas para sembrar intenciones en el momento más poderoso del mes.',
+    '5 Rituales de Lunes': 'Para empezar la semana desde tu centro y con intención clara.',
+    'Meditaciones para Dormir': '5 prácticas para soltar el día y descansar desde el alma.'
+  };
+  let recursoSeleccionado = '';
+
+  function irASuscripcion(recurso) {
+    recursoSeleccionado = recurso;
+    const titulo = document.getElementById('suscripcion-titulo');
+    const sub = document.getElementById('suscripcion-sub');
+    titulo.innerHTML = `Tu regalo<br><em>${recurso}</em>`;
+    sub.textContent = (LEAD_MAGNETS_DESC[recurso] || '') +
+      ' Déjanos tu correo y te lo enviamos en este momento.';
+    // El href="#suscribete" del link ya hace scroll; no se necesita más aquí.
+  }
+
   // ── SUSCRIPCIÓN ──
   function suscribirse() {
     const email = document.getElementById('email-sub').value.trim();
@@ -836,13 +857,21 @@
       msg.style.color = '#E8B857';
       return;
     }
-    // Enviar a Google Apps Script
+    // Enviar a Google Apps Script, incluyendo el recurso específico pedido
+    // (si la persona llegó por scroll libre, sin clickear ningún botón,
+    // recursoSeleccionado queda vacío y el backend lo marca para revisión).
     fetch('https://script.google.com/macros/s/AKfycbzegIP2NaJ9_qAFjV-ELoF78QF7F_f5e07vIBeRulsHG9eD6fTvUe8X-1fZz0q6CNA/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tipo: 'suscripcion_ebooks', email: email })
+      body: JSON.stringify({
+        tipo: 'suscripcion_ebooks',
+        email: email,
+        recurso: recursoSeleccionado
+      })
     }).then(() => {
-      msg.textContent = '✦ ¡Listo! Te escribimos con el primer recurso.';
+      msg.textContent = recursoSeleccionado
+        ? `✦ ¡Listo! "${recursoSeleccionado}" va en camino a tu correo.`
+        : '✦ ¡Listo! Te escribimos con el primer recurso.';
       msg.style.color = '#C9A44C';
       document.getElementById('email-sub').value = '';
     }).catch(() => {
