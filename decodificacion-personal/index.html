@@ -1,1 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de Investigación — Decodificación Personal · Ousia Essentia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noche:#1A1A10;
+    --crema:#F5F0E8;
+    --dorado:#C9A44C;
+    --calido:#E8B857;
+    --niebla:#E9E5D4;
+  }
 
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--crema);
+    color:var(--noche);
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+  }
+
+  ::selection{background:var(--dorado);color:var(--crema);}
+
+  /* ---------- BARRA DE PROGRESO ---------- */
+  .progreso{
+    position:fixed; top:0; left:0; width:100%; height:3px;
+    background:rgba(26,26,16,0.08); z-index:200;
+  }
+  .progreso-fill{
+    height:100%; width:0%; background:var(--dorado);
+    transition:width .3s ease;
+  }
+
+  /* ---------- CABECERA ---------- */
+  header{
+    padding:64px 24px 40px;
+    text-align:center;
+    background:var(--noche);
+    color:var(--crema);
+    position:relative;
+  }
+  .marca{
+    font-family:'Cormorant Garamond',serif;
+    font-size:13px;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    color:var(--dorado);
+    margin-bottom:22px;
+  }
+  header h1{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(30px,5vw,46px);
+    max-width:640px;
+    margin:0 auto 20px;
+    line-height:1.25;
+  }
+  .separador{
+    color:var(--dorado);
+    letter-spacing:10px;
+    font-size:14px;
+    margin:24px 0;
+  }
+  header p.intro{
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:16px;
+    max-width:520px;
+    margin:0 auto;
+    color:var(--niebla);
+  }
+
+  /* ---------- FORM WRAP ---------- */
+  main{max-width:640px; margin:0 auto; padding:56px 24px 100px;}
+
+  .bloque{margin-bottom:64px;}
+  .bloque-header{margin-bottom:32px;}
+  .bloque-eyebrow{
+    font-family:'Cormorant Garamond',serif;
+    font-size:13px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--dorado);
+    margin-bottom:10px;
+  }
+  .bloque-titulo{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:26px;
+    font-weight:400;
+    color:var(--noche);
+  }
+
+  .pregunta{margin-bottom:32px;}
+  .pregunta label.pregunta-texto{
+    display:block;
+    font-family:'Raleway',sans-serif;
+    font-size:15px;
+    font-weight:500;
+    color:var(--noche);
+    margin-bottom:8px;
+  }
+  .pregunta label.pregunta-texto .req{color:var(--dorado); margin-left:4px;}
+  .ayuda{
+    font-family:'Raleway',sans-serif;
+    font-size:13px;
+    font-weight:300;
+    font-style:italic;
+    color:#6b6a5f;
+    margin-bottom:12px;
+  }
+
+  input[type="text"], input[type="email"], input[type="date"], textarea{
+    width:100%;
+    background:#fff;
+    border:1px solid rgba(26,26,16,0.15);
+    border-radius:2px;
+    padding:14px 16px;
+    font-family:'Raleway',sans-serif;
+    font-size:15px;
+    font-weight:300;
+    color:var(--noche);
+    transition:border-color .2s ease;
+  }
+  textarea{min-height:110px; resize:vertical;}
+  input:focus, textarea:focus{
+    outline:none;
+    border-color:var(--dorado);
+  }
+  input:focus-visible, textarea:focus-visible, .opcion input:focus-visible + span{
+    outline:2px solid var(--dorado);
+    outline-offset:2px;
+  }
+
+  /* opciones (radio / checkbox) */
+  .opciones{display:flex; flex-direction:column; gap:10px;}
+  .opcion{
+    display:flex; align-items:center; gap:12px;
+    padding:12px 16px;
+    background:#fff;
+    border:1px solid rgba(26,26,16,0.12);
+    border-radius:2px;
+    cursor:pointer;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .opcion:hover{border-color:var(--dorado);}
+  .opcion input{accent-color:var(--dorado); width:16px; height:16px; flex-shrink:0;}
+  .opcion span{font-size:14px; font-weight:300;}
+
+  .opcion-otra{margin-top:4px;}
+
+  /* checkbox de consentimiento */
+  .consentimiento{
+    display:flex; gap:14px; align-items:flex-start;
+    background:var(--niebla);
+    border:1px solid rgba(201,164,76,0.35);
+    padding:20px;
+    border-radius:2px;
+    margin-top:8px;
+  }
+  .consentimiento input{margin-top:3px; accent-color:var(--dorado); width:17px; height:17px; flex-shrink:0;}
+  .consentimiento span{font-size:13.5px; font-weight:300; line-height:1.55;}
+
+  /* ---------- ENVÍO ---------- */
+  .enviar-wrap{text-align:center; margin-top:56px;}
+  button#enviar{
+    font-family:'Raleway',sans-serif;
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--crema);
+    background:var(--noche);
+    border:1px solid var(--dorado);
+    padding:18px 48px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:background .25s ease, transform .15s ease;
+  }
+  button#enviar:hover{background:#2a2a1c;}
+  button#enviar:active{transform:scale(0.98);}
+  button#enviar:disabled{opacity:.5; cursor:not-allowed;}
+
+  .nota-envio{
+    font-size:12.5px; color:#6b6a5f; margin-top:16px; font-weight:300;
+  }
+
+  .error-msg{
+    color:#a5432c; font-size:12.5px; margin-top:6px; display:none; font-weight:400;
+  }
+  .pregunta.invalido input, .pregunta.invalido textarea{border-color:#a5432c;}
+  .pregunta.invalido .error-msg{display:block;}
+
+  /* ---------- PANTALLA DE CONFIRMACIÓN ---------- */
+  #confirmacion{
+    display:none;
+    max-width:560px; margin:0 auto; padding:100px 24px;
+    text-align:center;
+  }
+  #confirmacion .phi{
+    font-family:'Cormorant Garamond',serif; font-size:36px; color:var(--dorado); margin-bottom:24px;
+  }
+  #confirmacion h2{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:400;
+    font-size:30px; margin-bottom:18px;
+  }
+  #confirmacion p{font-size:15px; font-weight:300; color:#4a4a40; margin-bottom:8px;}
+
+  footer{
+    text-align:center; padding:40px 24px 56px;
+    font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:3px;
+    color:#9c9a8c; text-transform:uppercase;
+  }
+
+  @media (max-width:480px){
+    header{padding:48px 20px 32px;}
+    main{padding:40px 18px 80px;}
+    .bloque{margin-bottom:48px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="progreso"><div class="progreso-fill" id="progresoFill"></div></div>
+
+<header>
+  <div class="marca">Ousia Essentia</div>
+  <h1>Antes de investigar, empezamos por comprender lo que traes.</h1>
+  <div class="separador">✦ ◇ ○ ◇ ✦</div>
+  <p class="intro">Este formulario es el primer acto de tu Decodificación Personal. No es un trámite — es una invitación a poner en palabras aquello que deseas comprender. Tómate el tiempo que necesites.</p>
+</header>
+
+<main>
+<form id="formulario" novalidate>
+
+  <!-- BLOQUE 1 -->
+  <section class="bloque">
+    <div class="bloque-header">
+      <div class="bloque-eyebrow">Bloque I</div>
+      <div class="bloque-titulo">Datos de apertura del caso</div>
+    </div>
+
+    <div class="pregunta" data-required="true">
+      <label class="pregunta-texto" for="nombre">Nombre completo<span class="req">*</span></label>
+      <input type="text" id="nombre" name="nombre" autocomplete="name">
+      <div class="error-msg">Por favor escribe tu nombre completo.</div>
+    </div>
+
+    <div class="pregunta" data-required="true" data-type="email">
+      <label class="pregunta-texto" for="correo">Correo electrónico<span class="req">*</span></label>
+      <input type="email" id="correo" name="correo" autocomplete="email">
+      <div class="error-msg">Por favor escribe un correo electrónico válido.</div>
+    </div>
+
+    <div class="pregunta" data-required="true">
+      <label class="pregunta-texto" for="fecha_nacimiento">Fecha de nacimiento<span class="req">*</span></label>
+      <div class="ayuda">La usamos como parte de las herramientas metodológicas de la investigación (numerología / carta natal).</div>
+      <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+      <div class="error-msg">Por favor indica tu fecha de nacimiento.</div>
+    </div>
+
+    <div class="pregunta">
+      <label class="pregunta-texto" for="hora_nacimiento">Hora de nacimiento</label>
+      <div class="ayuda">Si no la sabes con exactitud, escribe una hora aproximada. Es opcional, pero mejora la precisión de la carta astrológica.</div>
+      <input type="time" id="hora_nacimiento" name="hora_nacimiento">
+    </div>
+
+    <div class="pregunta" data-required="true">
+      <label class="pregunta-texto" for="lugar_nacimiento">Lugar de nacimiento<span class="req">*</span></label>
+      <div class="ayuda">Ciudad y país (ej. Medellín, Colombia). Lo necesitamos para calcular tu carta astrológica.</div>
+      <input type="text" id="lugar_nacimiento" name="lugar_nacimiento" autocomplete="off">
+      <div class="error-msg">Por favor indica tu ciudad y país de nacimiento.</div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 2 -->
+  <section class="bloque">
+    <div class="bloque-header">
+      <div class="bloque-eyebrow">Bloque II</div>
+      <div class="bloque-titulo">Delimitación del Fenómeno de Consciencia</div>
+    </div>
+
+    <div class="pregunta" data-required="true">
+      <label class="pregunta-texto" for="situacion">¿Qué situación o experiencia de tu vida deseas comprender con mayor profundidad?<span class="req">*</span></label>
+      <div class="ayuda">Puedes describirla con tus propias palabras, sin necesidad de organizarla perfectamente. Cuéntala como la estás viviendo.</div>
+      <textarea id="situacion" name="situacion"></textarea>
+      <div class="error-msg">Cuéntanos un poco sobre tu situación.</div>
+    </div>
+
+    <div class="pregunta" data-required="true">
+      <label class="pregunta-texto" for="pregunta_central">Si tuvieras que resumir en una sola pregunta lo que más deseas comprender, ¿cuál sería?<span class="req">*</span></label>
+      <input type="text" id="pregunta_central" name="pregunta_central">
+      <div class="error-msg">Este campo es necesario para delimitar tu investigación.</div>
+    </div>
+
+    <div class="pregunta" data-required="true" data-type="radio">
+      <label class="pregunta-texto">¿Desde cuándo sientes que esta situación es relevante en tu vida?<span class="req">*</span></label>
+      <div class="opciones">
+        <label class="opcion"><input type="radio" name="antiguedad" value="Hace pocas semanas"><span>Hace pocas semanas</span></label>
+        <label class="opcion"><input type="radio" name="antiguedad" value="Hace algunos meses"><span>Hace algunos meses</span></label>
+        <label class="opcion"><input type="radio" name="antiguedad" value="Hace más de un año"><span>Hace más de un año</span></label>
+        <label class="opcion"><input type="radio" name="antiguedad" value="Es algo que se repite desde hace mucho tiempo"><span>Es algo que se repite desde hace mucho tiempo</span></label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="pregunta" data-required="true">
+      <label class="pregunta-texto" for="intentos_previos">¿Qué has intentado hasta ahora para comprender o resolver esta situación?<span class="req">*</span></label>
+      <textarea id="intentos_previos" name="intentos_previos"></textarea>
+      <div class="error-msg">Cuéntanos qué caminos ya has explorado.</div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 3 -->
+  <section class="bloque">
+    <div class="bloque-header">
+      <div class="bloque-eyebrow">Bloque III</div>
+      <div class="bloque-titulo">Primera reflexión</div>
+    </div>
+
+    <div class="pregunta" data-required="true" data-type="checkbox-group">
+      <label class="pregunta-texto">¿Qué emociones predominan cuando piensas en esta situación?<span class="req">*</span></label>
+      <div class="ayuda">Puedes seleccionar varias.</div>
+      <div class="opciones">
+        <label class="opcion"><input type="checkbox" name="emociones" value="Confusión"><span>Confusión</span></label>
+        <label class="opcion"><input type="checkbox" name="emociones" value="Tristeza"><span>Tristeza</span></label>
+        <label class="opcion"><input type="checkbox" name="emociones" value="Ansiedad"><span>Ansiedad</span></label>
+        <label class="opcion"><input type="checkbox" name="emociones" value="Frustración"><span>Frustración</span></label>
+        <label class="opcion"><input type="checkbox" name="emociones" value="Miedo"><span>Miedo</span></label>
+        <label class="opcion"><input type="checkbox" name="emociones" value="Cansancio"><span>Cansancio</span></label>
+        <label class="opcion"><input type="checkbox" name="emociones" value="Esperanza"><span>Esperanza</span></label>
+        <label class="opcion"><input type="checkbox" name="emociones" value="Curiosidad"><span>Curiosidad</span></label>
+      </div>
+      <input type="text" id="emocion_otra" name="emocion_otra" placeholder="Otra (opcional)" class="opcion-otra">
+      <div class="error-msg">Por favor selecciona al menos una emoción.</div>
+    </div>
+
+    <div class="pregunta" data-required="true">
+      <label class="pregunta-texto" for="patron">¿Hay algo que sientes que se repite — una y otra vez — en relación con esta situación?<span class="req">*</span></label>
+      <div class="ayuda">Puede ser un patrón, una reacción tuya, un tipo de persona o situación que vuelve a aparecer.</div>
+      <textarea id="patron" name="patron"></textarea>
+      <div class="error-msg">Este campo nos ayuda a observar los patrones de tu experiencia.</div>
+    </div>
+
+    <div class="pregunta" data-required="true">
+      <label class="pregunta-texto" for="expectativa">¿Qué esperas obtener de esta investigación?<span class="req">*</span></label>
+      <div class="ayuda">No es necesario que sepas exactamente qué buscas. Solo cuéntanos qué te gustaría llevarte al terminar de leer tu Decodificación.</div>
+      <textarea id="expectativa" name="expectativa"></textarea>
+      <div class="error-msg">Este campo nos ayuda a comprender tu expectativa frente al proceso.</div>
+    </div>
+
+    <div class="pregunta">
+      <label class="pregunta-texto" for="info_adicional">¿Hay algo más que consideres importante que sepamos antes de comenzar la investigación?</label>
+      <textarea id="info_adicional" name="info_adicional"></textarea>
+    </div>
+
+    <div class="pregunta" data-required="true" data-type="checkbox-single">
+      <div class="consentimiento">
+        <input type="checkbox" id="consentimiento" name="consentimiento">
+        <span>Confirmo que comprendo que la Decodificación Personal es un proceso de investigación interpretativo, y no un diagnóstico médico, psicológico ni una predicción exacta del futuro.</span>
+      </div>
+      <div class="error-msg">Necesitamos tu confirmación para comenzar la investigación.</div>
+    </div>
+  </section>
+
+  <div class="enviar-wrap">
+    <button type="submit" id="enviar">Comenzar mi investigación</button>
+    <div class="nota-envio">Al enviar este formulario, tu Caso de Investigación queda abierto. Recibirás tu Decodificación Personal en un plazo de 5 a 7 días hábiles.</div>
+  </div>
+
+</form>
+
+<div id="confirmacion">
+  <div class="phi">φ</div>
+  <h2>Tu Caso de Investigación ha sido abierto.</h2>
+  <p>Gracias por confiar tu proceso a Ousia Essentia.</p>
+  <p>Comenzamos la investigación con todo el cuidado que tu experiencia merece. Recibirás tu Decodificación Personal en tu correo dentro de los próximos 5 a 7 días hábiles.</p>
+</div>
+
+</main>
+
+<footer>✦ Ousia Essentia · φ</footer>
+
+<script>
+(function(){
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzegIP2NaJ9_qAFjV-ELoF78QF7F_f5e07vIBeRulsHG9eD6fTvUe8X-1fZz0q6CNA/exec";
+
+  const form = document.getElementById('formulario');
+  const progresoFill = document.getElementById('progresoFill');
+  const preguntas = Array.from(form.querySelectorAll('.pregunta'));
+
+  // Barra de progreso según scroll
+  function actualizarProgreso(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progresoFill.style.width = Math.min(pct, 100) + '%';
+  }
+  window.addEventListener('scroll', actualizarProgreso);
+  actualizarProgreso();
+
+  function validarPregunta(p){
+    const tipo = p.dataset.type;
+    let valido = true;
+
+    if(tipo === 'radio'){
+      valido = !!p.querySelector('input[type="radio"]:checked');
+    } else if(tipo === 'checkbox-group'){
+      valido = p.querySelectorAll('input[type="checkbox"]:checked').length > 0
+               || (document.getElementById('emocion_otra').value.trim().length > 0);
+    } else if(tipo === 'checkbox-single'){
+      valido = p.querySelector('input[type="checkbox"]').checked;
+    } else {
+      const campo = p.querySelector('input, textarea');
+      if(campo){
+        valido = campo.value.trim().length > 0;
+        if(valido && p.dataset.type === 'email'){
+          valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(campo.value.trim());
+        }
+      }
+    }
+
+    p.classList.toggle('invalido', !valido);
+    return valido;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    let formularioValido = true;
+    preguntas.forEach(p => {
+      if(p.dataset.required === 'true'){
+        const ok = validarPregunta(p);
+        if(!ok) formularioValido = false;
+      }
+    });
+
+    if(!formularioValido){
+      const primerError = form.querySelector('.invalido');
+      if(primerError) primerError.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    const boton = document.getElementById('enviar');
+    boton.disabled = true;
+    boton.textContent = 'Enviando…';
+
+    const emociones = Array.from(form.querySelectorAll('input[name="emociones"]:checked')).map(el => el.value);
+    const emocionOtra = document.getElementById('emocion_otra').value.trim();
+    if(emocionOtra) emociones.push(emocionOtra);
+
+    const datos = {
+      tipo: "decodificacion_personal",
+      nombre: form.nombre.value.trim(),
+      correo: form.correo.value.trim(),
+      fecha_nacimiento: form.fecha_nacimiento.value,
+      hora_nacimiento: form.hora_nacimiento.value,
+      lugar_nacimiento: form.lugar_nacimiento.value.trim(),
+      situacion: form.situacion.value.trim(),
+      pregunta_central: form.pregunta_central.value.trim(),
+      antiguedad: (form.querySelector('input[name="antiguedad"]:checked') || {}).value || "",
+      intentos_previos: form.intentos_previos.value.trim(),
+      emociones: emociones.join(", "),
+      patron: form.patron.value.trim(),
+      expectativa: form.expectativa.value.trim(),
+      info_adicional: form.info_adicional.value.trim(),
+      consentimiento: form.consentimiento.checked,
+      fecha_envio: new Date().toISOString()
+    };
+
+    fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(datos)
+    })
+    .then(() => {
+      form.style.display = 'none';
+      document.querySelector('header').style.display = 'none';
+      document.getElementById('confirmacion').style.display = 'block';
+      window.scrollTo({top:0, behavior:'smooth'});
+    })
+    .catch(() => {
+      boton.disabled = false;
+      boton.textContent = 'Comenzar mi investigación';
+      alert('Hubo un problema al enviar el formulario. Por favor intenta de nuevo o escríbenos directamente.');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
