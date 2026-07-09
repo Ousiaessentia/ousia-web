@@ -539,6 +539,105 @@
   }
   .brujula-incluye-item span.check { color: var(--dorado); flex-shrink: 0; }
 
+  /* ─── DECODIFICACIÓN PERSONAL ─── */
+  .decodificacion-section {
+    padding: 6rem 6rem;
+    background: var(--niebla);
+  }
+  .decodificacion-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .decodificacion-cover {
+    background: var(--noche);
+    border: 1px solid rgba(201,164,76,0.3);
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .decodificacion-cover::before {
+    content: 'φ';
+    position: absolute;
+    top: -10px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: rgba(201,164,76,0.08);
+  }
+  .decodificacion-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--noche);
+    background: var(--dorado);
+    padding: 0.35rem 0.9rem;
+    margin-bottom: 1.4rem;
+  }
+  .decodificacion-cover-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1.6rem;
+  }
+  .decodificacion-cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 2.1rem;
+    color: var(--crema);
+    line-height: 1.25;
+    margin-bottom: 1.4rem;
+  }
+  .decodificacion-cover-rule {
+    width: 40px; height: 1px;
+    background: var(--dorado);
+    margin: 0 auto 1.4rem;
+  }
+  .decodificacion-cover-sub {
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.7;
+  }
+  .decodificacion-cover-price {
+    margin-top: 1.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--dorado);
+  }
+  .decodificacion-content { text-align: left; }
+  .decodificacion-tagline {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #5a4a32;
+    margin: 1.4rem 0 2rem;
+  }
+  .decodificacion-incluye {
+    margin-bottom: 2.2rem;
+  }
+  .decodificacion-incluye-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1rem;
+  }
+  .decodificacion-incluye-item {
+    display: flex;
+    gap: 0.7rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(201,164,76,0.18);
+    font-size: 0.85rem;
+    color: var(--noche);
+    line-height: 1.6;
+  }
+  .decodificacion-incluye-item span.check { color: var(--dorado); flex-shrink: 0; }
+
   /* ─── BIBLIOTECA (expandida) ─── */
   .biblioteca-section {
     padding: 6rem 6rem;
@@ -1147,6 +1246,8 @@
     .entrelunas { padding: 5rem 2rem; }
     .brujula-section { padding: 5rem 2rem; }
     .brujula-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .decodificacion-section { padding: 5rem 2rem; }
+    .decodificacion-inner { grid-template-columns: 1fr; gap: 3rem; }
     .biblioteca-section { padding: 5rem 2rem; }
     .biblioteca-grid { grid-template-columns: 1fr; }
   }
@@ -1163,6 +1264,7 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="#sobre">Sobre mí</a></li>
     <li><a href="/mapa-del-alma">Mapa del Alma</a></li>
+    <li><a href="/decodificacion-personal">Decodificación Personal</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
     <li><a href="#onirya">Onirya</a></li>
     <li><a href="/brujula-interior">Brújula Interior</a></li>
@@ -1203,6 +1305,41 @@
     <div class="floating-tag tag1">✦ Numerología personal</div>
     <div class="floating-tag tag2">✦ Registros akáshicos</div>
     <div class="floating-tag tag3">✦ Carta natal · Tarot</div>
+  </div>
+</section>
+
+<div class="divider">✦ &nbsp; ◇ &nbsp; ○ &nbsp; ◇ &nbsp; ✦</div>
+
+<!-- DECODIFICACIÓN PERSONAL (nuevo) -->
+<section class="decodificacion-section" id="decodificacion">
+  <div class="decodificacion-inner">
+
+    <div class="decodificacion-cover">
+      <span class="decodificacion-badge">✦ Nuevo</span>
+      <p class="decodificacion-cover-eyebrow">Ousia Essentia</p>
+      <div class="decodificacion-cover-title">Decodificación<br>Personal</div>
+      <div class="decodificacion-cover-rule"></div>
+      <p class="decodificacion-cover-sub">Investigación personalizada<br>Documento asincrónico · 5–7 días</p>
+      <div class="decodificacion-cover-price">$35 USD</div>
+    </div>
+
+    <div class="decodificacion-content">
+      <p class="section-eyebrow">✦ Investigación personalizada</p>
+      <h2 class="section-title">Comprende lo que<br><em>llevas cargando.</em></h2>
+      <p class="decodificacion-tagline">
+        Una investigación que integra tarot, numerología, observación narrativa y percepción intuitiva para ayudarte a comprender con profundidad una situación significativa de tu vida. No es una predicción — es una comprensión que amplía cómo te ves a ti misma.
+      </p>
+
+      <div class="decodificacion-incluye">
+        <p class="decodificacion-incluye-label">Incluye</p>
+        <div class="decodificacion-incluye-item"><span class="check">✦</span> Formulario de Investigación para delimitar tu Fenómeno de Consciencia</div>
+        <div class="decodificacion-incluye-item"><span class="check">✦</span> Documento personalizado de 8–12 páginas con hallazgos e hipótesis</div>
+        <div class="decodificacion-incluye-item"><span class="check">✦</span> Entrega en 5–7 días hábiles a tu correo</div>
+      </div>
+
+      <a href="/decodificacion-personal" class="btn-primary">Comenzar mi investigación →</a>
+    </div>
+
   </div>
 </section>
 
