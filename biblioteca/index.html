@@ -278,6 +278,26 @@
     font-size: 2.4rem; font-weight: 300; color: var(--crema);
     line-height: 1;
   }
+  .precio-tachado {
+    text-decoration: line-through;
+    opacity: 0.4;
+    font-size: 0.55em;
+    margin-right: 0.5rem;
+  }
+  .descuento-tag {
+    display: inline-block;
+    background: var(--dorado);
+    color: var(--noche);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    margin-left: 0.6rem;
+    vertical-align: middle;
+    border-radius: 2px;
+  }
   .price-note {
     font-size: 0.65rem; letter-spacing: 0.2em;
     color: rgba(245,240,232,0.3); text-transform: uppercase;
@@ -596,10 +616,10 @@
 <!-- LANZAMIENTO -->
 <section class="lanzamiento">
   <span class="section-eyebrow">✦ Disponible ahora</span>
-  <h2 class="section-title">El primer portal<br><em>ya está abierto.</em></h2>
-  <p class="section-sub">Una guía completa para proteger tu campo energético y recuperar la paz que siempre fue tuya.</p>
+  <h2 class="section-title">Los primeros portales<br><em>ya están abiertos.</em></h2>
+  <p class="section-sub">Dos guías completas para proteger tu energía y soltar lo que ya no te pertenece.</p>
 
-  <div class="card-featured">
+  <div class="card-featured" style="margin-bottom: 2.5rem;">
     <!-- Visual -->
     <div class="card-featured-visual">
       <div class="card-visual-inner">
@@ -611,7 +631,7 @@
 
     <!-- Contenido -->
     <div class="card-featured-content">
-      <span class="badge-lanzamiento">✦ Lanzamiento — Semana 1</span>
+      <span class="badge-lanzamiento">✦ Disponible ahora</span>
       <span class="badge-bonus">+ Bonus de lanzamiento incluido</span>
       <h3 class="title"><em>Escudo Interior</em></h3>
       <p class="subtitle">7 pasos para proteger tu energía y recuperar tu paz</p>
@@ -625,12 +645,48 @@
         <li>Descarga instantánea en PDF</li>
       </ul>
       <div class="price-block">
-        <div class="price-main">$35.000 COP</div>
+        <div class="price-main"><span class="precio-tachado">$35.000 COP</span>$21.000 COP<span class="descuento-tag">-40%</span></div>
         <div class="price-note">Descarga inmediata · Pago seguro vía PayPal</div>
       </div>
       <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
-        <button class="btn-comprar" onclick="abrirModal()">Quiero este ebook ✦</button>
+        <button class="btn-comprar" onclick="abrirModal('escudo')">Quiero este ebook ✦</button>
         <a href="/biblioteca/escudo-interior" style="font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,240,232,0.4); text-decoration:none; border-bottom:1px solid rgba(201,164,76,0.25); padding-bottom:2px; transition:color 0.3s;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='rgba(245,240,232,0.4)'">Conocer más →</a>
+      </div>
+      <div class="paypal-note">🔒 Pago procesado por PayPal · Recibes el PDF por email</div>
+    </div>
+  </div>
+
+  <div class="card-featured">
+    <!-- Visual -->
+    <div class="card-featured-visual">
+      <div class="card-visual-inner">
+        <div class="card-visual-num">02</div>
+        <div class="card-visual-title">Limpia tu<br>Campo</div>
+        <div class="card-visual-badge">✦ Ebook · PDF</div>
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div class="card-featured-content">
+      <span class="badge-lanzamiento">✦ Disponible ahora</span>
+      <h3 class="title"><em>Limpia tu Campo</em></h3>
+      <p class="subtitle">7 rituales para soltar lo que ya no te pertenece</p>
+      <p class="desc">
+        Para cuando sientes un cansancio que el descanso no resuelve, tensión sin explicación, o una sensibilidad al entorno que te desborda. Siete rituales concretos — desde el baño de sal hasta el ritual del agua y la luna — para soltar lo que absorbiste y recuperar tu campo.
+      </p>
+      <ul class="includes">
+        <li>7 rituales prácticos, desde el baño de sal hasta el ritual del agua y la luna</li>
+        <li>Técnicas de limpieza energética con base en medicina integrativa</li>
+        <li>Una semana guiada completa de limpieza</li>
+        <li>Descarga instantánea en PDF</li>
+      </ul>
+      <div class="price-block">
+        <div class="price-main"><span class="precio-tachado">$35.000 COP</span>$21.000 COP<span class="descuento-tag">-40%</span></div>
+        <div class="price-note">Descarga inmediata · Pago seguro vía PayPal</div>
+      </div>
+      <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+        <button class="btn-comprar" onclick="abrirModal('limpia')">Quiero este ebook ✦</button>
+        <a href="/biblioteca/limpia-tu-campo" style="font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,240,232,0.4); text-decoration:none; border-bottom:1px solid rgba(201,164,76,0.25); padding-bottom:2px; transition:color 0.3s;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='rgba(245,240,232,0.4)'">Conocer más →</a>
       </div>
       <div class="paypal-note">🔒 Pago procesado por PayPal · Recibes el PDF por email</div>
     </div>
@@ -690,15 +746,15 @@
   <span class="footer-web">www.ousiaessentia.com</span>
 </footer>
 
-<!-- MODAL PAYPAL -->
+<!-- MODAL PAYPAL (genérico — reutilizado por ambos ebooks) -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <button class="modal-close" onclick="cerrarModal()">✕</button>
     <p class="modal-eyebrow">✦ Completa tu compra</p>
-    <h3 class="modal-title">Escudo Interior</h3>
-    <p class="modal-subtitle">7 pasos para proteger tu energía y recuperar tu paz</p>
-    <div class="modal-price">$35.000 COP</div>
-    <p class="modal-bonus">+ Bonus de lanzamiento incluido esta semana</p>
+    <h3 class="modal-title" id="modal-titulo">Escudo Interior</h3>
+    <p class="modal-subtitle" id="modal-subtitulo">7 pasos para proteger tu energía y recuperar tu paz</p>
+    <div class="modal-price" id="modal-precio"><span class="precio-tachado">$35.000 COP</span>$21.000 COP<span class="descuento-tag">-40%</span></div>
+    <p class="modal-bonus" id="modal-bonus-text">+ Bonus de lanzamiento incluido esta semana</p>
     <div class="modal-divider"></div>
     <ul class="modal-steps">
       <li>
@@ -726,8 +782,41 @@
 <script src="https://www.paypal.com/sdk/js?client-id=AfhirgDWN_GS49UBBrgF1dlNIhIHACtpAcV2EFzH7vULupuAvnmUfcRKhrLFRAbWNgbNrbqJUdLjvfPz&currency=USD&locale=es_CO"></script>
 
 <script>
+  // ── PRODUCTOS (promo 40% OFF hasta 15 sept — revertir usdValue a '8.50' y priceHTML sin tachado después) ──
+  const PRODUCTS = {
+    escudo: {
+      nombre: 'Escudo Interior',
+      subtitle: '7 pasos para proteger tu energía y recuperar tu paz',
+      priceHTML: '<span class="precio-tachado">$35.000 COP</span>$21.000 COP<span class="descuento-tag">-40%</span>',
+      bonus: '+ Bonus de lanzamiento incluido esta semana',
+      usdValue: '5.10',
+      paypalDescription: 'Escudo Interior — Ousia Essentia (40% OFF hasta 15 sept)'
+    },
+    limpia: {
+      nombre: 'Limpia tu Campo',
+      subtitle: '7 rituales para soltar lo que ya no te pertenece',
+      priceHTML: '<span class="precio-tachado">$35.000 COP</span>$21.000 COP<span class="descuento-tag">-40%</span>',
+      bonus: '',
+      usdValue: '5.10',
+      paypalDescription: 'Limpia tu Campo — Ousia Essentia (40% OFF hasta 15 sept)'
+    }
+  };
+
+  let productoActual = null;
+
   // ── MODAL ──
-  function abrirModal() {
+  function abrirModal(key) {
+    productoActual = key;
+    const p = PRODUCTS[key];
+
+    document.getElementById('modal-titulo').textContent = p.nombre;
+    document.getElementById('modal-subtitulo').textContent = p.subtitle;
+    document.getElementById('modal-precio').innerHTML = p.priceHTML;
+
+    const bonusEl = document.getElementById('modal-bonus-text');
+    bonusEl.style.display = p.bonus ? 'block' : 'none';
+    bonusEl.textContent = p.bonus;
+
     document.getElementById('modal').classList.add('active');
     document.body.style.overflow = 'hidden';
     renderPayPalButton();
@@ -741,10 +830,11 @@
   });
 
   // ── PAYPAL BUTTON ──
-  let paypalRendered = false;
+  // Se limpia y se vuelve a renderizar en cada apertura, para que tome
+  // el monto correcto del producto seleccionado (escudo o limpia).
   function renderPayPalButton() {
-    if (paypalRendered) return;
-    paypalRendered = true;
+    const container = document.getElementById('paypal-button-container');
+    container.innerHTML = '';
 
     paypal.Buttons({
       style: {
@@ -754,13 +844,13 @@
         label:  'pay'
       },
       createOrder: function(data, actions) {
+        const p = PRODUCTS[productoActual];
         return actions.order.create({
           purchase_units: [{
-            description: 'Escudo Interior — Ousia Essentia',
+            description: p.paypalDescription,
             amount: {
               currency_code: 'USD',
-              // $35.000 COP ≈ $8.50 USD — actualiza según la tasa del momento
-              value: '8.50'
+              value: p.usdValue
             }
           }]
         });
@@ -768,6 +858,7 @@
       onApprove: function(data, actions) {
         return actions.order.capture().then(function(details) {
           // Enviar notificación al backend (Google Apps Script)
+          const p = PRODUCTS[productoActual];
           const email = details.payer.email_address;
           const nombre = details.payer.name.given_name;
           const orderId = details.id;
@@ -777,7 +868,7 @@
             headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify({
               tipo: 'compra_ebook',
-              ebook: 'Escudo Interior',
+              ebook: p.nombre,
               email: email,
               nombre: nombre,
               orderId: orderId

@@ -36,6 +36,14 @@
   "serviceType": "Acompañamiento espiritual",
   "description": "Proceso de 5 sesiones que integra numerología, astrología, tarot, registros akáshicos y medicina integrativa para entender quién eres y hacia dónde te llama tu alma.",
   "url": "https://ousiaessentia.com/mapa-del-alma",
+  "offers": {
+    "@type": "Offer",
+    "price": "480000",
+    "priceCurrency": "COP",
+    "priceValidUntil": "2026-09-15",
+    "availability": "https://schema.org/InStock",
+    "url": "https://ousiaessentia.com/mapa-del-alma"
+  },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Las 5 sesiones",
@@ -256,6 +264,42 @@
     letter-spacing: 0.12em;
     color: #9a8060;
     font-style: italic;
+  }
+  .mapa-price-block {
+    margin: 0.5rem 0 2.2rem;
+  }
+  .mapa-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: var(--noche);
+    line-height: 1;
+  }
+  .precio-tachado {
+    text-decoration: line-through;
+    opacity: 0.4;
+    font-size: 0.55em;
+    margin-right: 0.5rem;
+  }
+  .descuento-tag {
+    display: inline-block;
+    background: var(--dorado);
+    color: var(--crema);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.28rem 0.6rem;
+    margin-left: 0.6rem;
+    vertical-align: middle;
+    border-radius: 2px;
+  }
+  .mapa-price-note {
+    font-size: 0.7rem;
+    color: #9a8060;
+    letter-spacing: 0.08em;
+    margin-top: 0.4rem;
   }
 
   /* Sesiones panel */
@@ -910,6 +954,11 @@
         <li>Plan de vida integral</li>
       </ul>
 
+      <div class="mapa-price-block">
+        <div class="mapa-price"><span class="precio-tachado">$800.000 COP</span>$480.000 COP<span class="descuento-tag">-40%</span></div>
+        <p class="mapa-price-note">Precio promocional válido hasta el 15 de septiembre</p>
+      </div>
+
       <div class="mapa-cta-group">
         <a href="#inscripcion" class="btn-primary">Iniciar mi viaje</a>
         <p class="mapa-cta-note">Sin compromiso · Te contacto en menos de 24 horas</p>
@@ -1059,7 +1108,7 @@
         </div>
         <div class="garantia-item">
           <span class="garantia-icon">✦</span>
-          <span>El precio se comparte en la conversación inicial</span>
+          <span>Inversión: $480.000 COP · Promo -40% hasta el 15 de septiembre</span>
         </div>
         <div class="garantia-item">
           <span class="garantia-icon">✦</span>
