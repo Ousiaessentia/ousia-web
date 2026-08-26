@@ -372,8 +372,11 @@
   </section>
 
   <div class="enviar-wrap">
-    <button type="submit" id="enviar">Comenzar mi investigación</button>
-    <div class="nota-envio">Al enviar este formulario, tu Caso de Investigación queda abierto. Recibirás tu Decodificación Personal en un plazo de 5 a 7 días hábiles.</div>
+    <button type="submit" id="enviar">Continuar al pago — $35 USD</button>
+    <div class="nota-envio">Al completar el pago, tu Caso de Investigación queda abierto. Recibirás tu Decodificación Personal en un plazo de 5 a 7 días hábiles.</div>
+
+    <div id="paypal-button-container" style="display:none; max-width:420px; margin:28px auto 0;"></div>
+    <div id="pago-estado" style="display:none; text-align:center; margin-top:18px; font-size:14px; line-height:1.6;"></div>
   </div>
 
 </form>
@@ -388,6 +391,8 @@
 </main>
 
 <footer>✦ Ousia Essentia · φ</footer>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AfhirgDWN_GS49UBBrgF1dlNIhIHACtpAcV2EFzH7vULupuAvnmUfcRKhrLFRAbWNgbNrbqJUdLjvfPz&currency=USD&intent=capture"></script>
 
 <script>
 (function(){
@@ -432,32 +437,20 @@
     return valido;
   }
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
+  const boton = document.getElementById('enviar');
+  const paypalContainer = document.getElementById('paypal-button-container');
+  const pagoEstado = document.getElementById('pago-estado');
+  let botonPayPalRenderizado = false;
 
-    let formularioValido = true;
-    preguntas.forEach(p => {
-      if(p.dataset.required === 'true'){
-        const ok = validarPregunta(p);
-        if(!ok) formularioValido = false;
-      }
-    });
-
-    if(!formularioValido){
-      const primerError = form.querySelector('.invalido');
-      if(primerError) primerError.scrollIntoView({behavior:'smooth', block:'center'});
-      return;
-    }
-
-    const boton = document.getElementById('enviar');
-    boton.disabled = true;
-    boton.textContent = 'Enviando…';
-
+  // Junta todos los datos del formulario en el objeto que espera Apps Script.
+  // Se llama recién DESPUÉS de que el pago se aprueba (no antes), para que
+  // el orderId real de PayPal viaje siempre junto con el resto de la info.
+  function recolectarDatos(){
     const emociones = Array.from(form.querySelectorAll('input[name="emociones"]:checked')).map(el => el.value);
     const emocionOtra = document.getElementById('emocion_otra').value.trim();
     if(emocionOtra) emociones.push(emocionOtra);
 
-    const datos = {
+    return {
       tipo: "decodificacion_personal",
       formToken: "Eexwifp_8Umhp3Fvnr2dgVmdPe6Edtd4",
       nombre: form.nombre.value.trim(),
@@ -476,23 +469,106 @@
       consentimiento: form.consentimiento.checked,
       fecha_envio: new Date().toISOString()
     };
+  }
 
-    fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain" },
-      body: JSON.stringify(datos)
-    })
-    .then(() => {
-      form.style.display = 'none';
-      document.querySelector('header').style.display = 'none';
-      document.getElementById('confirmacion').style.display = 'block';
-      window.scrollTo({top:0, behavior:'smooth'});
-    })
-    .catch(() => {
-      boton.disabled = false;
-      boton.textContent = 'Comenzar mi investigación';
-      alert('Hubo un problema al enviar el formulario. Por favor intenta de nuevo o escríbenos directamente.');
+  function mostrarMensaje(texto, esError){
+    pagoEstado.style.display = 'block';
+    pagoEstado.style.color = esError ? '#B33A3A' : 'inherit';
+    pagoEstado.textContent = texto;
+  }
+
+  function volverAFormulario(mensajeError){
+    boton.style.display = 'inline-block';
+    boton.disabled = false;
+    boton.textContent = 'Continuar al pago — $35 USD';
+    paypalContainer.style.display = 'none';
+    if(mensajeError) mostrarMensaje(mensajeError, true);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    let formularioValido = true;
+    preguntas.forEach(p => {
+      if(p.dataset.required === 'true'){
+        const ok = validarPregunta(p);
+        if(!ok) formularioValido = false;
+      }
     });
+
+    if(!formularioValido){
+      const primerError = form.querySelector('.invalido');
+      if(primerError) primerError.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    // Formulario válido: se oculta el botón de envío y aparece el pago.
+    // Los datos NO se mandan todavía — solo se manda cuando PayPal
+    // confirma el pago (ver onApprove más abajo).
+    boton.style.display = 'none';
+    pagoEstado.style.display = 'none';
+    paypalContainer.style.display = 'block';
+    paypalContainer.scrollIntoView({behavior:'smooth', block:'center'});
+
+    if(!botonPayPalRenderizado && window.paypal){
+      botonPayPalRenderizado = true;
+
+      paypal.Buttons({
+        style: { color: 'gold', shape: 'pill', label: 'pay', height: 45 },
+
+        createOrder: function(data, actions){
+          return actions.order.create({
+            purchase_units: [{
+              description: 'Decodificación Personal — Ousia Essentia',
+              amount: { value: '35.00', currency_code: 'USD' }
+            }]
+          });
+        },
+
+        onApprove: function(data, actions){
+          mostrarMensaje('Confirmando tu pago…', false);
+
+          return actions.order.capture().then(function(details){
+            const datos = recolectarDatos();
+            datos.orderId = details.id;
+            datos.payer_email = (details.payer && details.payer.email_address) || '';
+
+            return fetch(APPS_SCRIPT_URL, {
+              method: "POST",
+              headers: { "Content-Type": "text/plain" },
+              body: JSON.stringify(datos)
+            })
+            .then(res => res.json())
+            .then(function(respuesta){
+              if(respuesta && respuesta.result === 'ok'){
+                paypalContainer.style.display = 'none';
+                pagoEstado.style.display = 'none';
+                form.style.display = 'none';
+                document.querySelector('header').style.display = 'none';
+                document.getElementById('confirmacion').style.display = 'block';
+                window.scrollTo({top:0, behavior:'smooth'});
+              } else {
+                // El pago sí se completó en PayPal, pero el servidor no pudo
+                // verificarlo o crear el caso. No se pierde el dinero de la
+                // clienta — Ousia recibe una alerta interna para revisar el
+                // caso a mano. Aquí solo le pedimos que nos escriba.
+                paypalContainer.style.display = 'none';
+                mostrarMensaje('Tu pago se realizó correctamente, pero hubo un problema técnico al abrir tu Caso de Investigación. Escríbenos a ousia.essentia2@gmail.com con el número de orden ' + details.id + ' y lo resolvemos de inmediato — tu pago está seguro.', true);
+              }
+            });
+          });
+        },
+
+        onCancel: function(){
+          volverAFormulario('Pago cancelado. Puedes intentarlo de nuevo cuando quieras — tus respuestas siguen aquí arriba.');
+        },
+
+        onError: function(err){
+          volverAFormulario('Hubo un problema procesando el pago. Por favor intenta de nuevo o escríbenos a ousia.essentia2@gmail.com.');
+        }
+
+      }).render('#paypal-button-container');
+    }
   });
 })();
 </script>
