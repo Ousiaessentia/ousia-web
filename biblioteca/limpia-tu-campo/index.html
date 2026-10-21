@@ -36,9 +36,8 @@
   "url": "https://ousiaessentia.com/biblioteca/limpia-tu-campo",
   "offers": {
     "@type": "Offer",
-    "price": "21000",
+    "price": "35000",
     "priceCurrency": "COP",
-    "priceValidUntil": "2026-09-15",
     "availability": "https://schema.org/InStock",
     "url": "https://ousiaessentia.com/biblioteca/limpia-tu-campo"
   }
@@ -623,7 +622,7 @@
         <span class="meta-value">Toda mujer en camino</span>
       </div>
     </div>
-    <div class="hero-price"><span class="precio-tachado">$35.000 COP</span>$21.000 COP<span class="descuento-tag">-40%</span></div>
+    <div class="hero-price">$35.000 COP</div>
     <p class="hero-price-note">Descarga inmediata · Pago seguro vía PayPal</p>
     <button class="btn-comprar" onclick="abrirModal()">Quiero este ebook ✦</button>
     <div class="paypal-note">🔒 Recibes el PDF en tu correo en menos de 5 min</div>
@@ -760,7 +759,7 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        Sí. El pago se procesa a través de PayPal en USD, así que puedes comprarlo desde cualquier país. El precio equivale a aproximadamente $5.10 USD (con el 40% de descuento activo hasta el 15 de septiembre). Solo necesitas una cuenta PayPal o tarjeta de crédito/débito.
+        Sí. El pago se procesa a través de PayPal en USD, así que puedes comprarlo desde cualquier país. El precio equivale a aproximadamente $8.50 USD. Solo necesitas una cuenta PayPal o tarjeta de crédito/débito.
       </div>
     </div>
 
@@ -821,7 +820,7 @@
     <p class="modal-eyebrow">✦ Completa tu compra</p>
     <h3 class="modal-title">Limpia tu Campo</h3>
     <p class="modal-subtitle">7 rituales para soltar lo que ya no te pertenece</p>
-    <div class="modal-price"><span class="precio-tachado">$35.000 COP</span>$21.000 COP<span class="descuento-tag">-40%</span></div>
+    <div class="modal-price">$35.000 COP</div>
     <div class="modal-divider"></div>
     <ul class="modal-steps">
       <li><span class="step-num">1.</span><span>Haz clic en el botón de PayPal y completa el pago de forma segura.</span></li>
@@ -869,8 +868,8 @@
       createOrder: function(data, actions) {
         return actions.order.create({
           purchase_units: [{
-            description: 'Limpia tu Campo — Ousia Essentia (40% OFF hasta 15 sept)',
-            amount: { currency_code: 'USD', value: '5.10' } // Promo: $21.000 COP ≈ $5.10 USD (40% OFF sobre $8.50). Revertir a '8.50' después del 15 de sept.
+            description: 'Limpia tu Campo — Ousia Essentia',
+            amount: { currency_code: 'USD', value: '8.50' } // $35.000 COP ≈ $8.50 USD
           }]
         });
       },
