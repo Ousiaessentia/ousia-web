@@ -1339,6 +1339,12 @@
     font-size: 0.8rem; font-weight: 300; line-height: 1.7;
     color: var(--texto-suave); margin-bottom: 1.6rem;
   }
+  .espera-mas { margin: -0.7rem 0 1.5rem; font-size: 0.7rem; letter-spacing: 0.1em; }
+  .espera-mas a {
+    color: var(--dorado); text-decoration: none;
+    border-bottom: 1px solid rgba(201,164,76,0.4); padding-bottom: 2px;
+  }
+  .espera-mas a:hover, .espera-mas a:focus-visible { color: var(--calido); border-color: var(--calido); }
   .espera-pregunta {
     font-size: 0.7rem; letter-spacing: 0.12em; color: var(--texto-suave); margin-bottom: 0.7rem;
   }
@@ -1415,11 +1421,10 @@
       padding: 2rem;
       transform: translateX(100%);
       transition: transform 0.35s ease;
-      box-shadow: -8px 0 30px rgba(0,0,0,0.15);
       z-index: 120;
     }
     .nav-links a { white-space: normal; }
-    .nav-links.open { transform: translateX(0); }
+    .nav-links.open { transform: translateX(0); box-shadow: -8px 0 30px rgba(0,0,0,0.15); }
   }
 
   /* ─── RESPONSIVE ─── */
@@ -1870,6 +1875,7 @@
       <p class="espera-eyebrow">✦ Lectura 2027</p>
       <h2 class="espera-titulo" id="esperaTitulo">Sé de las primeras en recibir la <em>Lectura 2027</em></h2>
       <p class="espera-desc">Tu año personal, mes a mes. Déjanos cómo prefieres que te contactemos y te escribimos en cuanto esté disponible.</p>
+      <p class="espera-mas"><a href="/lectura-2027">Ver qué incluye la Lectura 2027 →</a></p>
 
       <form id="esperaForm" novalidate>
         <p class="espera-pregunta" id="esperaPregunta">¿Cómo prefieres que te contactemos?</p>
