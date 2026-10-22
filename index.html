@@ -144,6 +144,8 @@
     white-space: nowrap;
     transition: color 0.3s;
   }
+  .nav-links a.nav-nuevo { color: var(--dorado); opacity: 1; font-weight: 500; }
+  .nav-links a.nav-nuevo::before { content: '✦\00a0'; font-size: .85em; }
   .nav-links a:hover { color: var(--dorado); }
   @media (min-width: 1600px) { .nav-links a { letter-spacing: 0.2em; } }
   .nav-links .nav-cta {
@@ -1405,7 +1407,7 @@
   }
 
   /* ─── MENÚ HAMBURGUESA (cuando el menú ya no cabe en una línea) ─── */
-  @media (max-width: 1320px) {
+  @media (max-width: 1479px) {
     nav { padding: 1.2rem 2rem; }
     .nav-toggle { display: flex; }
     .nav-links {
@@ -1476,6 +1478,7 @@
     <li><a href="#testimonios">Testimonios</a></li>
     <li><a href="#onirya">Onirya</a></li>
     <li><a href="/brujula-interior">Brújula Interior</a></li>
+    <li><a href="/lectura-2027" class="nav-nuevo">Lectura 2027</a></li>
  <li><a href="/biblioteca">Biblioteca</a></li>
     <li><a href="/mapa-del-alma" class="nav-cta">Iniciar mi viaje</a></li>
   </ul>

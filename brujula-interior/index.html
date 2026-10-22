@@ -93,6 +93,8 @@
     text-decoration: none;
     transition: color 0.3s;
   }
+  .nav-links a.nav-nuevo { color: var(--dorado); opacity: 1; font-weight: 500; }
+  .nav-links a.nav-nuevo::before { content: '✦\00a0'; font-size: .85em; }
   .nav-links a:hover { color: var(--dorado); }
   .nav-links .nav-cta {
     padding: 0.6rem 1.4rem;
@@ -997,9 +999,8 @@
       padding: 2rem;
       transform: translateX(100%);
       transition: transform 0.35s ease;
-      box-shadow: -8px 0 30px rgba(0,0,0,0.15);
     }
-    .nav-links.open { transform: translateX(0); }
+    .nav-links.open { transform: translateX(0); box-shadow: -8px 0 30px rgba(0,0,0,0.15); }
     .hero { padding: 7rem 1.5rem 4rem; }
     .entendimiento, .que-es, .bonus, .escala, .pago, .inscripcion, .footer-cta { padding: 4rem 1.5rem; }
     .que-es-inner, .inscripcion-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -1023,6 +1024,7 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="https://ousiaessentia.com#sobre">Sobre mí</a></li>
     <li><a href="https://ousiaessentia.com/mapa-del-alma">Mapa del Alma</a></li>
+    <li><a href="/lectura-2027" class="nav-nuevo">Lectura 2027</a></li>
     <li><a href="#inscripcion" class="nav-cta">Agenda tu sesión</a></li>
   </ul>
 </nav>
