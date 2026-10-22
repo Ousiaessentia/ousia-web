@@ -113,7 +113,7 @@
   /* ─── NAV ─── */
   nav {
     position: fixed; top: var(--promo-h); width: 100%; z-index: 100;
-    padding: 1.4rem 5rem;
+    padding: 1.4rem clamp(1.5rem, 4vw, 5rem);
     display: flex; justify-content: space-between; align-items: center;
     background: rgba(245,240,232,0.93);
     backdrop-filter: blur(14px);
@@ -134,17 +134,20 @@
     color: var(--dorado);
     display: none;
   }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links { display: flex; gap: clamp(0.9rem, 1.6vw, 2.5rem); list-style: none; align-items: center; }
   .nav-links a {
     font-size: 0.7rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #6b5a40;
     text-decoration: none;
+    white-space: nowrap;
     transition: color 0.3s;
   }
   .nav-links a:hover { color: var(--dorado); }
+  @media (min-width: 1600px) { .nav-links a { letter-spacing: 0.2em; } }
   .nav-links .nav-cta {
+    display: inline-block;
     padding: 0.6rem 1.4rem;
     border: 1px solid var(--dorado);
     color: var(--dorado);
@@ -1395,8 +1398,8 @@
     .espera-titulo { font-size: 1.6rem; }
   }
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 960px) {
+  /* ─── MENÚ HAMBURGUESA (cuando el menú ya no cabe en una línea) ─── */
+  @media (max-width: 1320px) {
     nav { padding: 1.2rem 2rem; }
     .nav-toggle { display: flex; }
     .nav-links {
@@ -1415,7 +1418,12 @@
       box-shadow: -8px 0 30px rgba(0,0,0,0.15);
       z-index: 120;
     }
+    .nav-links a { white-space: normal; }
     .nav-links.open { transform: translateX(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 960px) {
     .hero { grid-template-columns: 1fr; }
     .hero-right { display: none; }
     .hero-left { padding: calc(7rem + var(--promo-h)) 2rem 5rem; }
