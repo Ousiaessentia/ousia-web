@@ -92,6 +92,17 @@
     padding: 0 1rem;
   }
   .promo-banner a:hover { color: var(--dorado); }
+  .promo-banner button.promo-inner {
+    background: none; border: 0; width: 100%; height: 100%;
+    justify-content: center; cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+  }
+  .promo-banner button.promo-inner:hover { color: var(--dorado); }
+  .promo-banner button.promo-inner:focus-visible { outline: 1px solid var(--dorado); outline-offset: -4px; }
+  @media (max-width: 480px) {
+    .promo-banner .promo-inner { font-size: 0.66rem; letter-spacing: 0.05em; gap: 0.4rem; padding: 0 0.6rem; }
+    .promo-banner .promo-sep { display: none; }
+  }
   .promo-banner strong {
     color: var(--dorado);
     font-weight: 600;
@@ -1290,6 +1301,100 @@
   }
   .entrelunas-success-text em { color: var(--dorado); }
 
+  /* ─── LISTA DE ESPERA · LECTURA 2027 ─── */
+  .espera-overlay {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(26,26,16,0.78);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.2rem; overflow-y: auto;
+  }
+  .espera-overlay[hidden] { display: none; }
+  .espera-modal {
+    position: relative; width: 100%; max-width: 460px; margin: auto;
+    background: var(--noche);
+    border: 1px solid rgba(201,164,76,0.4);
+    color: var(--crema);
+    padding: 2.6rem 2.2rem 2.2rem;
+    text-align: center;
+  }
+  .espera-cerrar {
+    position: absolute; top: 0.5rem; right: 0.7rem;
+    background: none; border: 0; cursor: pointer;
+    color: var(--texto-medio); font-size: 1.7rem; line-height: 1; padding: 0.4rem 0.7rem;
+  }
+  .espera-cerrar:hover, .espera-cerrar:focus-visible { color: var(--dorado); }
+  .espera-eyebrow {
+    font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--dorado); margin-bottom: 1rem;
+  }
+  .espera-titulo {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: 1.9rem; line-height: 1.2; margin-bottom: 0.9rem;
+  }
+  .espera-titulo em { color: var(--dorado); font-style: italic; }
+  .espera-desc {
+    font-size: 0.8rem; font-weight: 300; line-height: 1.7;
+    color: var(--texto-suave); margin-bottom: 1.6rem;
+  }
+  .espera-pregunta {
+    font-size: 0.7rem; letter-spacing: 0.12em; color: var(--texto-suave); margin-bottom: 0.7rem;
+  }
+  .espera-opciones {
+    display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.3rem;
+  }
+  .espera-opcion { position: relative; }
+  .espera-opcion input { position: absolute; opacity: 0; pointer-events: none; }
+  .espera-opcion span {
+    display: block; padding: 0.7rem 1.6rem; cursor: pointer;
+    border: 1px solid rgba(201,164,76,0.35);
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .espera-opcion input:checked + span { background: var(--dorado); border-color: var(--dorado); color: var(--noche); }
+  .espera-opcion input:focus-visible + span { outline: 2px solid var(--calido); outline-offset: 2px; }
+  .espera-label {
+    display: block; text-align: left; margin-bottom: 0.45rem;
+    font-size: 0.66rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--texto-medio);
+  }
+  .espera-input {
+    width: 100%; margin-bottom: 1.1rem; border-radius: 0; outline: none;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,164,76,0.35);
+    color: var(--crema);
+    font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 300;
+    padding: 0.9rem 1.1rem; transition: border-color 0.3s;
+  }
+  .espera-input::placeholder { color: rgba(245,240,232,0.3); }
+  .espera-input:focus { border-color: var(--dorado); }
+  .espera-check {
+    display: flex; gap: 0.7rem; align-items: flex-start; text-align: left; cursor: pointer;
+    font-size: 0.74rem; line-height: 1.6; color: var(--texto-suave); margin-bottom: 1.2rem;
+  }
+  .espera-check input { margin-top: 0.25rem; flex-shrink: 0; accent-color: var(--dorado); }
+  .espera-error {
+    text-align: left; color: #E8A08A; font-size: 0.76rem; line-height: 1.5; margin-bottom: 1rem;
+  }
+  .espera-error[hidden] { display: none; }
+  .espera-btn {
+    width: 100%; padding: 1rem 1.5rem; cursor: pointer; border: none;
+    background: var(--dorado); color: var(--noche);
+    font-family: 'Raleway', sans-serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    transition: background 0.35s;
+  }
+  .espera-btn:hover { background: var(--calido); }
+  .espera-btn:disabled { opacity: 0.55; cursor: default; }
+  .espera-exito[hidden] { display: none; }
+  .espera-exito-icon { display: block; font-size: 0.85rem; color: var(--dorado); letter-spacing: 0.5em; margin-bottom: 1rem; }
+  .espera-exito-texto {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.4rem; line-height: 1.5; margin-bottom: 1.6rem;
+  }
+  .espera-exito-texto em { color: var(--dorado); }
+  @media (max-width: 480px) {
+    .espera-modal { padding: 2.4rem 1.4rem 1.8rem; }
+    .espera-titulo { font-size: 1.6rem; }
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 960px) {
     nav { padding: 1.2rem 2rem; }
@@ -1338,11 +1443,11 @@
 
 <!-- PROMO BANNER -->
 <div class="promo-banner">
-  <div class="promo-inner">
+  <button type="button" class="promo-inner" id="esperaAbrir" aria-haspopup="dialog">
     <span><strong>MUY PRONTO</strong> · Lectura 2027</span>
     <span class="promo-sep">✦</span>
-    <span>Tu año personal, mes a mes</span>
-  </div>
+    <span>Obtenla primero →</span>
+  </button>
 </div>
 
 <!-- NAV -->
@@ -1748,7 +1853,187 @@
   <span class="footer-copy">© 2026 Valentina Montoya Londoño · Todos los derechos reservados</span>
 </footer>
 
+<!-- LISTA DE ESPERA · LECTURA 2027 -->
+<div class="espera-overlay" id="esperaOverlay" hidden>
+  <div class="espera-modal" role="dialog" aria-modal="true" aria-labelledby="esperaTitulo">
+    <button type="button" class="espera-cerrar" id="esperaCerrar" aria-label="Cerrar">×</button>
+
+    <div id="esperaFormBox">
+      <p class="espera-eyebrow">✦ Lectura 2027</p>
+      <h2 class="espera-titulo" id="esperaTitulo">Sé de las primeras en recibir la <em>Lectura 2027</em></h2>
+      <p class="espera-desc">Tu año personal, mes a mes. Déjanos cómo prefieres que te contactemos y te escribimos en cuanto esté disponible.</p>
+
+      <form id="esperaForm" novalidate>
+        <p class="espera-pregunta" id="esperaPregunta">¿Cómo prefieres que te contactemos?</p>
+        <div class="espera-opciones" role="radiogroup" aria-labelledby="esperaPregunta">
+          <label class="espera-opcion"><input type="radio" name="medio" value="Correo" checked><span>Correo</span></label>
+          <label class="espera-opcion"><input type="radio" name="medio" value="Celular"><span>Celular</span></label>
+        </div>
+
+        <label class="espera-label" for="esperaContacto" id="esperaLabel">Tu correo</label>
+        <input class="espera-input" id="esperaContacto" name="contacto" type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" maxlength="120" required>
+
+        <label class="espera-check">
+          <input type="checkbox" id="esperaAutoriza">
+          <span>Autorizo a Ousia Essentia a contactarme sobre el lanzamiento de la Lectura 2027.</span>
+        </label>
+
+        <p class="espera-error" id="esperaError" role="alert" hidden></p>
+        <button class="espera-btn" type="submit" id="esperaBtn">Quiero ser de las primeras</button>
+      </form>
+    </div>
+
+    <div class="espera-exito" id="esperaExito" hidden>
+      <span class="espera-exito-icon">✦ ◇ ○ ◇ ✦</span>
+      <p class="espera-exito-texto">Listo ✦ Te escribiremos en cuanto la <em>Lectura 2027</em> esté disponible.</p>
+      <button type="button" class="espera-btn" id="esperaCerrar2">Cerrar</button>
+    </div>
+  </div>
+</div>
+
 <script>
+  // ── LISTA DE ESPERA · LECTURA 2027 ──
+  (function () {
+    const URL_ESPERA = 'https://script.google.com/macros/s/AKfycbxCSPWIlF5U9eOuEIdrfozFah-YGJFCbPqudka-Qkr6_wV0pi537xAmSJsKtNVOs1JH/exec';
+
+    const abrirBtn = document.getElementById('esperaAbrir');
+    const overlay = document.getElementById('esperaOverlay');
+    const form = document.getElementById('esperaForm');
+    const formBox = document.getElementById('esperaFormBox');
+    const exito = document.getElementById('esperaExito');
+    const contacto = document.getElementById('esperaContacto');
+    const label = document.getElementById('esperaLabel');
+    const autoriza = document.getElementById('esperaAutoriza');
+    const errorEl = document.getElementById('esperaError');
+    const enviarBtn = document.getElementById('esperaBtn');
+    if (!abrirBtn || !overlay || !form) return;
+
+    let focoPrevio = null;
+    let enviando = false;
+
+    const MEDIOS = {
+      Correo:  { etiqueta: 'Tu correo', tipo: 'email', modo: 'email', auto: 'email', ph: 'tu@correo.com' },
+      Celular: { etiqueta: 'Tu número de celular', tipo: 'tel', modo: 'tel', auto: 'tel', ph: '+57 300 000 0000' }
+    };
+
+    function medioActual() {
+      return form.querySelector('input[name="medio"]:checked').value;
+    }
+
+    function mostrarError(msg) {
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+    }
+
+    function limpiarError() {
+      errorEl.hidden = true;
+      errorEl.textContent = '';
+    }
+
+    function aplicarMedio() {
+      const m = MEDIOS[medioActual()];
+      label.textContent = m.etiqueta;
+      contacto.type = m.tipo;
+      contacto.setAttribute('inputmode', m.modo);
+      contacto.setAttribute('autocomplete', m.auto);
+      contacto.placeholder = m.ph;
+      contacto.value = '';
+      limpiarError();
+    }
+
+    function abrir() {
+      focoPrevio = document.activeElement;
+      overlay.hidden = false;
+      document.body.style.overflow = 'hidden';
+      contacto.focus();
+    }
+
+    function cerrar() {
+      overlay.hidden = true;
+      document.body.style.overflow = '';
+      if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
+    }
+
+    function contactoValido(medio, valor) {
+      if (medio === 'Correo') return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor);
+      if (!/^[\d\s+()\-]+$/.test(valor)) return false;
+      const digitos = valor.replace(/\D/g, '');
+      return digitos.length >= 7 && digitos.length <= 15;
+    }
+
+    abrirBtn.addEventListener('click', abrir);
+    document.getElementById('esperaCerrar').addEventListener('click', cerrar);
+    document.getElementById('esperaCerrar2').addEventListener('click', cerrar);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) cerrar(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (overlay.hidden) return;
+      if (e.key === 'Escape') { cerrar(); return; }
+      if (e.key !== 'Tab') return;
+      const focables = Array.from(overlay.querySelectorAll('button, input, [href]'))
+        .filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+      if (!focables.length) return;
+      const primero = focables[0];
+      const ultimo = focables[focables.length - 1];
+      if (e.shiftKey && document.activeElement === primero) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus(); }
+    });
+
+    form.querySelectorAll('input[name="medio"]').forEach(function (r) {
+      r.addEventListener('change', aplicarMedio);
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (enviando) return;
+      limpiarError();
+
+      const medio = medioActual();
+      const valor = contacto.value.trim();
+
+      if (!contactoValido(medio, valor)) {
+        mostrarError(medio === 'Correo'
+          ? 'Revisa tu correo: parece que falta algo.'
+          : 'Revisa tu número de celular: debe tener entre 7 y 15 dígitos.');
+        contacto.focus();
+        return;
+      }
+      if (!autoriza.checked) {
+        mostrarError('Necesitamos tu autorización para poder contactarte.');
+        autoriza.focus();
+        return;
+      }
+
+      enviando = true;
+      enviarBtn.disabled = true;
+      enviarBtn.textContent = 'Enviando…';
+
+      fetch(URL_ESPERA, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ medio: medio, contacto: valor, autoriza: true })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (r) {
+          if (r && r.ok) {
+            formBox.hidden = true;
+            exito.hidden = false;
+            document.getElementById('esperaCerrar2').focus();
+          } else {
+            throw new Error('respuesta_invalida');
+          }
+        })
+        .catch(function () {
+          mostrarError('No pudimos guardar tu registro. Inténtalo de nuevo en un momento.');
+        })
+        .then(function () {
+          enviando = false;
+          enviarBtn.disabled = false;
+          enviarBtn.textContent = 'Quiero ser de las primeras';
+        });
+    });
+  })();
+
   // ── ENTRE LUNAS ──
   (function () {
     const form = document.getElementById('entrelunasFormEl');
